@@ -10,15 +10,17 @@
 
 @interface GridBrain : NSObject
 
-/* Array of NSNumbers specifying the key
- * The first number should be any MIDI note number, but will be normalized to the lowest
- * possible of the same note (e.g. 100, the E of the 3rd octave, would become 4, the first E.
+/* Array of NSNumbers specifying the scale
+ * The first number should number of halfsteps the first note is from the last note.
  * Subsequent numbers specify the number of MIDI notes (half steps) each note is from the
- * previous. (e.g. C Major: {0,2,2,1,2,2,2,1})
- * The key's last entry should complete the "octave" (key[0] is C0, key[1] is C1. Keys need
- * not have exactly 8 notes, however.)
+ * previous. (e.g. Major: {1,2,2,1,2,2,2})
  */
-@property (strong, nonatomic)NSArray *key;
+@property (strong, nonatomic)NSArray *scale;
+
+/* MIDI note number referring to where the scale will begin.
+ * Will be normalized to the lowest possible number corresponding to that note.
+ */
+@property (strong, nonatomic)NSNumber *key;
 
 /* Array of NSNumbers specifying if a note should be played as a chord
  * Behavior for !chordInKey (not default behavior)
