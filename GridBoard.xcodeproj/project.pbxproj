@@ -18,7 +18,10 @@
 		1C1FAC221709F0AC00BCF2E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC211709F0AC00BCF2E9 /* Default-568h@2x.png */; };
 		1C1FAC251709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC231709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard */; };
 		1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC261709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard */; };
-		1C1FAC2B1709F0AC00BCF2E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC2A1709F0AC00BCF2E9 /* ViewController.m */; };
+		1C1FAC321709F5E200BCF2E9 /* tymoczko_fig3a.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC311709F5E200BCF2E9 /* tymoczko_fig3a.png */; };
+		1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */; };
+		1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC361709F73500BCF2E9 /* GridBrain.m */; };
+		1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC391709F78100BCF2E9 /* GridViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,8 +40,12 @@
 		1C1FAC211709F0AC00BCF2E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1C1FAC241709F0AC00BCF2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1C1FAC271709F0AC00BCF2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1C1FAC291709F0AC00BCF2E9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1C1FAC2A1709F0AC00BCF2E9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1C1FAC311709F5E200BCF2E9 /* tymoczko_fig3a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tymoczko_fig3a.png; sourceTree = "<group>"; };
+		1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tymoczko_fig3.png; sourceTree = "<group>"; };
+		1C1FAC351709F73500BCF2E9 /* GridBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridBrain.h; path = ../GridBrain.h; sourceTree = "<group>"; };
+		1C1FAC361709F73500BCF2E9 /* GridBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridBrain.m; path = ../GridBrain.m; sourceTree = "<group>"; };
+		1C1FAC381709F78100BCF2E9 /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridViewController.h; path = ../GridViewController.h; sourceTree = "<group>"; };
+		1C1FAC391709F78100BCF2E9 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewController.m; path = ../GridViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,8 @@
 		1C1FABFC1709F0AC00BCF2E9 = {
 			isa = PBXGroup;
 			children = (
+				1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */,
+				1C1FAC311709F5E200BCF2E9 /* tymoczko_fig3a.png */,
 				1C1FAC111709F0AC00BCF2E9 /* GridBoard */,
 				1C1FAC0A1709F0AC00BCF2E9 /* Frameworks */,
 				1C1FAC081709F0AC00BCF2E9 /* Products */,
@@ -85,12 +94,12 @@
 		1C1FAC111709F0AC00BCF2E9 /* GridBoard */ = {
 			isa = PBXGroup;
 			children = (
+				1C1FAC3C1709F7A500BCF2E9 /* Logic */,
+				1C1FAC3B1709F79500BCF2E9 /* View Controllers */,
 				1C1FAC1A1709F0AC00BCF2E9 /* AppDelegate.h */,
 				1C1FAC1B1709F0AC00BCF2E9 /* AppDelegate.m */,
 				1C1FAC231709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard */,
 				1C1FAC261709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard */,
-				1C1FAC291709F0AC00BCF2E9 /* ViewController.h */,
-				1C1FAC2A1709F0AC00BCF2E9 /* ViewController.m */,
 				1C1FAC121709F0AC00BCF2E9 /* Supporting Files */,
 			);
 			path = GridBoard;
@@ -108,6 +117,24 @@
 				1C1FAC211709F0AC00BCF2E9 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1C1FAC3B1709F79500BCF2E9 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAC381709F78100BCF2E9 /* GridViewController.h */,
+				1C1FAC391709F78100BCF2E9 /* GridViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		1C1FAC3C1709F7A500BCF2E9 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAC351709F73500BCF2E9 /* GridBrain.h */,
+				1C1FAC361709F73500BCF2E9 /* GridBrain.m */,
+			);
+			name = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +194,8 @@
 				1C1FAC221709F0AC00BCF2E9 /* Default-568h@2x.png in Resources */,
 				1C1FAC251709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */,
+				1C1FAC321709F5E200BCF2E9 /* tymoczko_fig3a.png in Resources */,
+				1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,7 +208,8 @@
 			files = (
 				1C1FAC181709F0AC00BCF2E9 /* main.m in Sources */,
 				1C1FAC1C1709F0AC00BCF2E9 /* AppDelegate.m in Sources */,
-				1C1FAC2B1709F0AC00BCF2E9 /* ViewController.m in Sources */,
+				1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */,
+				1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
