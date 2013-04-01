@@ -16,7 +16,7 @@
 
 @synthesize brain = _brain;
 @synthesize notesDisplay = _notesDisplay;
-
+@synthesize notesPlayedLabel = _notesPlayedLabel;
 
 - (void)viewDidLoad
 {
@@ -51,4 +51,12 @@
     return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
 }
 
+- (IBAction)notePressedEnd:(UITextField *)sender {
+    int note = [sender.text intValue];
+    NSArray *notes = [self.brain notesForTouchAtXValue:0 YValue:note];
+    self.notesPlayedLabel.text = @"";
+    for(NSNumber *num in notes) {
+        self.notesPlayedLabel.text = [self.notesPlayedLabel.text stringByAppendingString:[num stringValue]];
+    }
+}
 @end

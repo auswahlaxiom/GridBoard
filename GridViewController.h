@@ -13,5 +13,7 @@
 
 @property (strong, nonatomic)GridBrain *brain;
 @property (weak, nonatomic) IBOutlet UITextView *notesDisplay;
+- (IBAction)notePressedEnd:(UITextField *)sender;
+@property (weak, nonatomic) IBOutlet UILabel *notesPlayedLabel;
 
 @end

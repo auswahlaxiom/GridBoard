@@ -35,7 +35,9 @@
         _key = [NSNumber numberWithInt:0];
         
         //Default chord is the base note
-        _chord = [NSArray arrayWithObject:[NSNumber numberWithInt:0]];
+        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
+                  [NSNumber numberWithInt:4], [NSNumber numberWithInt:3],
+                  nil];
         //Chords will be forced to stay in key by default
         _chordInKey = [NSNumber numberWithBool:YES];
         
@@ -163,7 +165,7 @@
 }
 
 -(NSArray *)notesForTouchAtXValue:(int)x YValue:(int)y {
-    if(x > self.scale.count || y > [self.startRow intValue] + [self.numRows intValue]) return nil;
+    if(x > self.rows.count || y > self.scale.count) return nil;
     
     NSMutableArray *notes = [[NSMutableArray alloc] init];
     
@@ -171,12 +173,17 @@
     [notes addObject:[NSNumber numberWithInt:base]];
     if(self.chord.count > 1) {
         if([self.chordInKey boolValue]) {
-            int offsetIndex = 0;
+            int curX = x; int curY = y;
             for(int i = 1; i < self.chord.count; i++) {
-                offsetIndex = (offsetIndex + [[self.chord objectAtIndex:i] intValue]) % self.scale.count;
-                base += [[self.scale objectAtIndex:offsetIndex] intValue];
-                
-                [notes addObject:[NSNumber numberWithInt:base]];
+                curY += [[self.chord objectAtIndex:i] intValue];
+                //jump up a number of rows if neccessary
+                while(curY > self.scale.count) {
+                    curX++;
+                    curY -= self.scale.count;
+                    //end it if you jump off the grid;
+                    if(curX > self.rows.count) return notes;
+                }
+                [notes addObject:[[self.rows objectAtIndex:curX] objectAtIndex:curY]];
             }
         } else {
             for(int i = 1; i < self.chord.count; i++) {
