@@ -125,10 +125,7 @@
 		1C1FAC3B1709F79500BCF2E9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C1FAC381709F78100BCF2E9 /* GridViewController.h */,
-				1C1FAC391709F78100BCF2E9 /* GridViewController.m */,
-				1C1FAC41170A4F1600BCF2E9 /* GridView.h */,
-				1C1FAC42170A4F1600BCF2E9 /* GridView.m */,
+				1C1FAC44170A91C900BCF2E9 /* GridView */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -140,6 +137,17 @@
 				1C1FAC361709F73500BCF2E9 /* GridBrain.m */,
 			);
 			name = Logic;
+			sourceTree = "<group>";
+		};
+		1C1FAC44170A91C900BCF2E9 /* GridView */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAC381709F78100BCF2E9 /* GridViewController.h */,
+				1C1FAC391709F78100BCF2E9 /* GridViewController.m */,
+				1C1FAC41170A4F1600BCF2E9 /* GridView.h */,
+				1C1FAC42170A4F1600BCF2E9 /* GridView.m */,
+			);
+			name = GridView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

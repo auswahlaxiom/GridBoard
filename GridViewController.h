@@ -15,5 +15,6 @@
 @property (strong, nonatomic)GridBrain *brain;
 @property (weak, nonatomic) IBOutlet GridView *gridView;
 
+-(NSString *)stringForCellAtXValue:(int)x YValue:(int)y;
 
 @end

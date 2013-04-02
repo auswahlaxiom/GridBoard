@@ -62,7 +62,7 @@
 +(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave;
 
 //Array of NSNumbers representing the MIDI notes that should be activated for a given grid position
-// (0,0) is the lower left most grid location
+// x is the column, y is the row. (0,0) is the lower left most grid location
 -(NSArray *)notesForTouchAtXValue:(int) x YValue:(int) y;
 
 //Array of NSNumbers representing the MIDI notes at the given row
