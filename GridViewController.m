@@ -38,17 +38,31 @@
 //Music Stuff
 -(void)notesOn:(NSArray *)notes {
     [self.activeNotes addObjectsFromArray:notes];
+    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
+    
     for(NSNumber *note in notes) {
+        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
+            [gridActive addObject:pointVal];
+        }
+
         //TODO: ACTIVATE THE MIDI NOTE
         NSLog([NSString stringWithFormat:@"MIDI  on: %i", [note intValue]]);
     }
+    self.gridView.activeNotes = gridActive;
 }
 -(void)notesOff:(NSArray *)notes {
+    [self.activeNotes addObjectsFromArray:notes];
+    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
+
     for(NSNumber *note in notes) {
         [self.activeNotes removeObject:note];
+        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
+            [gridActive removeObject:pointVal];
+        }
         //TODO: DEACTIVATE THE MIDI NOTE
         NSLog([NSString stringWithFormat:@"MIDI off: %i", [note intValue]]);
     }
+    self.gridView.activeNotes = gridActive;
 }
 
 //touch events
@@ -66,10 +80,14 @@
         NSMutableArray *notesToTurnOff = [[NSMutableArray alloc] init];
         
         for(NSNumber *activeNote in self.activeNotes) {
-            if(![newNotes containsObject:activeNote]) [notesToTurnOff addObject:activeNote];
+            if(![newNotes containsObject:activeNote]){
+                [notesToTurnOff addObject:activeNote];
+            }
         }
         for(NSNumber *newNote in newNotes) {
-            if(![self.activeNotes containsObject:newNote]) [notesToTurnOn addObject:newNote];
+            if(![self.activeNotes containsObject:newNote]) {
+                [notesToTurnOn addObject:newNote];
+            }
         }
 
         [self notesOn:notesToTurnOn];
@@ -84,10 +102,7 @@
 }
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
     //same as touches ended?
-    for(UITouch *touch in touches) {
-        CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        [self notesOff:[self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y]];
-    }
+    [self touchesEnded:touches withEvent:event];
 }
 -(CGPoint)gridLocationOfTouch:(UITouch *)touch {
     CGFloat height = self.gridView.bounds.size.height;

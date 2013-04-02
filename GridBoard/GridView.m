@@ -10,6 +10,16 @@
 
 @implementation GridView
 
+@synthesize activeNotes = _activeNotes;
+
+-(void)setActiveNotes:(NSArray *)activeNotes {
+    if(_activeNotes != activeNotes) {
+        NSLog([activeNotes description]);
+        _activeNotes = activeNotes;
+        [self setNeedsDisplay];
+    }
+}
+
 - (void)awakeFromNib
 {
     [self setup]; // get initialized when we come out of a storyboard
@@ -26,7 +36,8 @@
 
 -(void)setup {
     self.contentMode = UIViewContentModeRedraw;
-    
+    self.activeNotes = [[NSArray alloc] init];
+    //other stuff?
 }
 
 
@@ -90,7 +101,18 @@
             CGFloat yPosition = height - (float) (y+1) * vInterval + vInterval/4;
             CGFloat exposition = (float) x * hInterval;
             CGRect rect = CGRectMake(exposition, yPosition, hInterval, vInterval);
+            UIGraphicsPushContext(context);
+            if([self.activeNotes containsObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]]) {
+                float color[4] = {.2, .7, .2, 1};
+                CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+                CGContextSetFillColorWithColor(context, CGColorCreate(space, color));
+            } else {
+                float color[4] = {0, 0, 0, 1};
+                CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
+                CGContextSetFillColorWithColor(context, CGColorCreate(space, color));
+            }
             [note drawInRect:rect withFont:[UIFont systemFontOfSize:40] lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
+            UIGraphicsPopContext();
         }
     }
 }

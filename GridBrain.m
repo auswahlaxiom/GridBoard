@@ -35,18 +35,18 @@
         _key = [NSNumber numberWithInt:0];
         
         //Default chord is the base note
-        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0], [NSNumber numberWithInt:1]
-                  ,nil];
+        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
+                  nil];
         //Chords will be forced to stay in key by default
         _chordInKey = [NSNumber numberWithBool:YES];
         
         //Default row interval is an octave
-        _rowInterval = [NSNumber numberWithInt:7];
+        _rowInterval = [NSNumber numberWithInt:3];
         //Rows stay in key by default
         _rowInKey = [NSNumber numberWithBool:YES];
         
         //Default starting row is 2 octaves below C0
-        _startRow = [NSNumber numberWithInt:4];
+        _startRow = [NSNumber numberWithInt:0];
         //Default number of rows to display is 6
         _numRows = [NSNumber numberWithInt:6];
         
@@ -172,17 +172,18 @@
     [notes addObject:[NSNumber numberWithInt:base]];
     if(self.chord.count > 1) {
         if([self.chordInKey boolValue]) {
-            int curX = x; int curY = y;
+            //determine where in the scale we are
+            int normalizedBase = base % 12;
+            while([self.baseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] == NSNotFound) {
+                normalizedBase++;
+            }
+            int scaleIndex = [self.baseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] + 1;
             for(int i = 1; i < self.chord.count; i++) {
-                curX += [[self.chord objectAtIndex:i] intValue];
-                //jump up a number of rows if neccessary
-                while(curX > self.scale.count) {
-                    curY++;
-                    curX -= self.scale.count;
-                    //end it if you jump off the grid;
-                    if(curY >= self.rows.count) return notes;
+                for(int j = 0; j < [[self.chord objectAtIndex:i] intValue]; j++) {
+                    base += [[self.scale objectAtIndex:(scaleIndex + j) % self.scale.count] intValue];
                 }
-                [notes addObject:[[self.rows objectAtIndex:curY] objectAtIndex:curX]];
+                [notes addObject:[NSNumber numberWithInt:base]];
+                scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]) % self.scale.count;
             }
         } else {
             for(int i = 1; i < self.chord.count; i++) {
@@ -192,6 +193,19 @@
         }
     }
     return notes;
+}
+
+-(NSArray *)gridLocationOfNote:(int) note {
+    int x, y;
+    NSMutableArray *locs = [[NSMutableArray alloc] init];
+    for(y = 0; y < self.rows.count; y++) {
+        for(x = 0; x <= self.scale.count; x++) {
+            if([[[self.rows objectAtIndex:y] objectAtIndex:x] intValue] == note) {
+                [locs addObject:[NSValue valueWithCGPoint: CGPointMake(x - [self.startRow intValue], y)]];
+            }
+        }
+    }
+    return locs;
 }
 
 @end

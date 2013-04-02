@@ -65,6 +65,9 @@
 // x is the column, y is the row. (0,0) is the lower left most grid location
 -(NSArray *)notesForTouchAtXValue:(int) x YValue:(int) y;
 
+//find where in the grid a note is
+-(NSArray *)gridLocationOfNote:(int) note;
+
 //Array of NSNumbers representing the MIDI notes at the given row
 // The lowest row is row 0, row numbers increment up by 1.
 -(NSArray *)notesForRow:(int) row;
