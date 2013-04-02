@@ -22,6 +22,7 @@
 		1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */; };
 		1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC361709F73500BCF2E9 /* GridBrain.m */; };
 		1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC391709F78100BCF2E9 /* GridViewController.m */; };
+		1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC42170A4F1600BCF2E9 /* GridView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		1C1FAC361709F73500BCF2E9 /* GridBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridBrain.m; path = ../GridBrain.m; sourceTree = "<group>"; };
 		1C1FAC381709F78100BCF2E9 /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridViewController.h; path = ../GridViewController.h; sourceTree = "<group>"; };
 		1C1FAC391709F78100BCF2E9 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewController.m; path = ../GridViewController.m; sourceTree = "<group>"; };
+		1C1FAC41170A4F1600BCF2E9 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
+		1C1FAC42170A4F1600BCF2E9 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 			children = (
 				1C1FAC381709F78100BCF2E9 /* GridViewController.h */,
 				1C1FAC391709F78100BCF2E9 /* GridViewController.m */,
+				1C1FAC41170A4F1600BCF2E9 /* GridView.h */,
+				1C1FAC42170A4F1600BCF2E9 /* GridView.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				1C1FAC1C1709F0AC00BCF2E9 /* AppDelegate.m in Sources */,
 				1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */,
 				1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */,
+				1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

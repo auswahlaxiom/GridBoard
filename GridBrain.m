@@ -36,7 +36,6 @@
         
         //Default chord is the base note
         _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
-                  [NSNumber numberWithInt:4], [NSNumber numberWithInt:3],
                   nil];
         //Chords will be forced to stay in key by default
         _chordInKey = [NSNumber numberWithBool:YES];

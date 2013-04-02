@@ -15,33 +15,22 @@
 @implementation GridViewController
 
 @synthesize brain = _brain;
-@synthesize notesDisplay = _notesDisplay;
-@synthesize notesPlayedLabel = _notesPlayedLabel;
+@synthesize gridView = _gridView;
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	self.brain = [[GridBrain alloc] init];
-    [self printNotes];
-    
+    self.gridView.rows = [self.brain.numRows intValue];
+    self.gridView.columns = (self.brain.scale.count + 1);
+    self.gridView.dataSource = self;
 }
 
--(void)printNotes {
-    self.notesDisplay.text = @"";
-    for(int i = [self.brain.startRow intValue] + [self.brain.numRows intValue] - 1; i != -1; i--) {
-        NSString *notes = @"";
-        for(int j = 0; j < [[self.brain notesForRow:i] count]; j++) {
-            NSString *noteName = [GridBrain nameForMidiNote:[[[self.brain notesForRow:i] objectAtIndex:j] intValue] showOctave:YES];
-            notes = [notes stringByAppendingString:[NSString stringWithFormat:@"%@ ", noteName]];
-        }
-        self.notesDisplay.text = [self.notesDisplay.text stringByAppendingString:[NSString stringWithFormat:@"%@\n", notes]];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSString *)stringForCellAtXValue:(int) x YValue:(int) y {
+    NSArray *notes = [self.brain notesForRow:y];
+    int note = [[notes objectAtIndex:x] intValue];
+    return [GridBrain nameForMidiNote:note showOctave:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -49,14 +38,5 @@
     // Return YES for supported orientations
     //Only Landscape
     return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
-}
-
-- (IBAction)notePressedEnd:(UITextField *)sender {
-    int note = [sender.text intValue];
-    NSArray *notes = [self.brain notesForTouchAtXValue:0 YValue:note];
-    self.notesPlayedLabel.text = @"";
-    for(NSNumber *num in notes) {
-        self.notesPlayedLabel.text = [self.notesPlayedLabel.text stringByAppendingString:[num stringValue]];
-    }
 }
 @end

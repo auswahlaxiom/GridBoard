@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "GridBrain.h"
+#import "GridView.h"
 
-@interface GridViewController : UIViewController
+@interface GridViewController : UIViewController <GridViewDataSource>
 
 @property (strong, nonatomic)GridBrain *brain;
-@property (weak, nonatomic) IBOutlet UITextView *notesDisplay;
-- (IBAction)notePressedEnd:(UITextField *)sender;
-@property (weak, nonatomic) IBOutlet UILabel *notesPlayedLabel;
+@property (weak, nonatomic) IBOutlet GridView *gridView;
+
 
 @end
