@@ -14,7 +14,6 @@
 
 -(void)setActiveNotes:(NSArray *)activeNotes {
     if(_activeNotes != activeNotes) {
-        NSLog([activeNotes description]);
         _activeNotes = activeNotes;
         [self setNeedsDisplay];
     }

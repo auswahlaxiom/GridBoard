@@ -23,6 +23,17 @@
 		1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC361709F73500BCF2E9 /* GridBrain.m */; };
 		1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC391709F78100BCF2E9 /* GridViewController.m */; };
 		1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC42170A4F1600BCF2E9 /* GridView.m */; };
+		1C3EB74F170BF38A000A6AED /* Piano.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB74E170BF38A000A6AED /* Piano.aupreset */; };
+		1C3EB753170BF6BC000A6AED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3EB752170BF6BC000A6AED /* AudioToolbox.framework */; };
+		1C3EB759170BF718000A6AED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3EB758170BF718000A6AED /* AVFoundation.framework */; };
+		1C3EB75B170BF8A9000A6AED /* Vibraphone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB75A170BF8A9000A6AED /* Vibraphone.aupreset */; };
+		1C3EB764170BFCC4000A6AED /* 1a#.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB75E170BFCC4000A6AED /* 1a#.caf */; };
+		1C3EB765170BFCC4000A6AED /* 2a#.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB75F170BFCC4000A6AED /* 2a#.caf */; };
+		1C3EB766170BFCC4000A6AED /* 3a#.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB760170BFCC4000A6AED /* 3a#.caf */; };
+		1C3EB767170BFCC4000A6AED /* 4g.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB761170BFCC4000A6AED /* 4g.caf */; };
+		1C3EB768170BFCC4000A6AED /* 5e.caf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB762170BFCC4000A6AED /* 5e.caf */; };
+		1C3EB769170BFCC4000A6AED /* Trombone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C3EB763170BFCC4000A6AED /* Trombone.aupreset */; };
+		1C3EB76E170BFED2000A6AED /* SampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C3EB76D170BFED1000A6AED /* SampleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +60,20 @@
 		1C1FAC391709F78100BCF2E9 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewController.m; path = ../GridViewController.m; sourceTree = "<group>"; };
 		1C1FAC41170A4F1600BCF2E9 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		1C1FAC42170A4F1600BCF2E9 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
+		1C3EB74E170BF38A000A6AED /* Piano.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Piano.aupreset; sourceTree = "<group>"; };
+		1C3EB752170BF6BC000A6AED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1C3EB754170BF6C4000A6AED /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		1C3EB756170BF6CA000A6AED /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		1C3EB758170BF718000A6AED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		1C3EB75A170BF8A9000A6AED /* Vibraphone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Vibraphone.aupreset; sourceTree = "<group>"; };
+		1C3EB75E170BFCC4000A6AED /* 1a#.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1a#.caf"; sourceTree = "<group>"; };
+		1C3EB75F170BFCC4000A6AED /* 2a#.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2a#.caf"; sourceTree = "<group>"; };
+		1C3EB760170BFCC4000A6AED /* 3a#.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3a#.caf"; sourceTree = "<group>"; };
+		1C3EB761170BFCC4000A6AED /* 4g.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 4g.caf; sourceTree = "<group>"; };
+		1C3EB762170BFCC4000A6AED /* 5e.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 5e.caf; sourceTree = "<group>"; };
+		1C3EB763170BFCC4000A6AED /* Trombone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Trombone.aupreset; sourceTree = "<group>"; };
+		1C3EB76C170BFED1000A6AED /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		1C3EB76D170BFED1000A6AED /* SampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C3EB759170BF718000A6AED /* AVFoundation.framework in Frameworks */,
+				1C3EB753170BF6BC000A6AED /* AudioToolbox.framework in Frameworks */,
 				1C1FAC0C1709F0AC00BCF2E9 /* UIKit.framework in Frameworks */,
 				1C1FAC0E1709F0AC00BCF2E9 /* Foundation.framework in Frameworks */,
 				1C1FAC101709F0AC00BCF2E9 /* CoreGraphics.framework in Frameworks */,
@@ -68,8 +95,10 @@
 		1C1FABFC1709F0AC00BCF2E9 = {
 			isa = PBXGroup;
 			children = (
-				1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */,
-				1C1FAC311709F5E200BCF2E9 /* tymoczko_fig3a.png */,
+				1C3EB758170BF718000A6AED /* AVFoundation.framework */,
+				1C3EB756170BF6CA000A6AED /* AudioUnit.framework */,
+				1C3EB754170BF6C4000A6AED /* CoreAudio.framework */,
+				1C3EB752170BF6BC000A6AED /* AudioToolbox.framework */,
 				1C1FAC111709F0AC00BCF2E9 /* GridBoard */,
 				1C1FAC0A1709F0AC00BCF2E9 /* Frameworks */,
 				1C1FAC081709F0AC00BCF2E9 /* Products */,
@@ -103,6 +132,7 @@
 				1C1FAC1B1709F0AC00BCF2E9 /* AppDelegate.m */,
 				1C1FAC231709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard */,
 				1C1FAC261709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard */,
+				1C3EB751170BF393000A6AED /* Resources */,
 				1C1FAC121709F0AC00BCF2E9 /* Supporting Files */,
 			);
 			path = GridBoard;
@@ -125,6 +155,8 @@
 		1C1FAC3B1709F79500BCF2E9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1C3EB76C170BFED1000A6AED /* SampleViewController.h */,
+				1C3EB76D170BFED1000A6AED /* SampleViewController.m */,
 				1C1FAC44170A91C900BCF2E9 /* GridView */,
 			);
 			name = "View Controllers";
@@ -148,6 +180,40 @@
 				1C1FAC42170A4F1600BCF2E9 /* GridView.m */,
 			);
 			name = GridView;
+			sourceTree = "<group>";
+		};
+		1C3EB751170BF393000A6AED /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */,
+				1C1FAC311709F5E200BCF2E9 /* tymoczko_fig3a.png */,
+				1C3EB75A170BF8A9000A6AED /* Vibraphone.aupreset */,
+				1C3EB74E170BF38A000A6AED /* Piano.aupreset */,
+				1C3EB75C170BFCC4000A6AED /* Sounds */,
+				1C3EB763170BFCC4000A6AED /* Trombone.aupreset */,
+			);
+			name = Resources;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1C3EB75C170BFCC4000A6AED /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1C3EB75D170BFCC4000A6AED /* Tbone */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		1C3EB75D170BFCC4000A6AED /* Tbone */ = {
+			isa = PBXGroup;
+			children = (
+				1C3EB75E170BFCC4000A6AED /* 1a#.caf */,
+				1C3EB75F170BFCC4000A6AED /* 2a#.caf */,
+				1C3EB760170BFCC4000A6AED /* 3a#.caf */,
+				1C3EB761170BFCC4000A6AED /* 4g.caf */,
+				1C3EB762170BFCC4000A6AED /* 5e.caf */,
+			);
+			path = Tbone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +275,14 @@
 				1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */,
 				1C1FAC321709F5E200BCF2E9 /* tymoczko_fig3a.png in Resources */,
 				1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */,
+				1C3EB74F170BF38A000A6AED /* Piano.aupreset in Resources */,
+				1C3EB75B170BF8A9000A6AED /* Vibraphone.aupreset in Resources */,
+				1C3EB764170BFCC4000A6AED /* 1a#.caf in Resources */,
+				1C3EB765170BFCC4000A6AED /* 2a#.caf in Resources */,
+				1C3EB766170BFCC4000A6AED /* 3a#.caf in Resources */,
+				1C3EB767170BFCC4000A6AED /* 4g.caf in Resources */,
+				1C3EB768170BFCC4000A6AED /* 5e.caf in Resources */,
+				1C3EB769170BFCC4000A6AED /* Trombone.aupreset in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +298,7 @@
 				1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */,
 				1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */,
 				1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */,
+				1C3EB76E170BFED2000A6AED /* SampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +389,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GridBoard/GridBoard-Prefix.pch";
 				INFOPLIST_FILE = "GridBoard/GridBoard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -325,6 +401,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GridBoard/GridBoard-Prefix.pch";
 				INFOPLIST_FILE = "GridBoard/GridBoard-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -349,6 +426,7 @@
 				1C1FAC301709F0AC00BCF2E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

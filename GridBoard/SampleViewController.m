@@ -1,14 +1,7 @@
-//
-//  GridViewController.m
-//  GridBoard
-//
-//  Created by Zachary Fleischman on 4/1/13.
-//  Copyright (c) 2013 Zachary Fleischman. All rights reserved.
-//
 
-#import "GridViewController.h"
 
-//For debug from sample code
+
+#import "SampleViewController.h"
 #import <AssertMacros.h>
 
 // some MIDI constants:
@@ -17,11 +10,12 @@ enum {
 	kMIDIMessage_NoteOff   = 0x8,
 };
 
-@interface GridViewController ()
-//Keep track of what notes are active, converted to points and passed to view for coloring
-@property (strong, nonatomic)NSMutableArray *activeNotes;
+#define kLowNote  48
+#define kHighNote 72
+#define kMidNote  60
 
-//audio junk
+// private class extension
+@interface SampleViewController ()
 @property (readwrite) Float64   graphSampleRate;
 @property (readwrite) AUGraph   processingGraph;
 @property (readwrite) AudioUnit samplerUnit;
@@ -35,121 +29,18 @@ enum {
 - (void)        restartAudioProcessingGraph;
 @end
 
-@implementation GridViewController
+@implementation SampleViewController
 
-@synthesize brain = _brain;
-@synthesize gridView = _gridView;
-@synthesize activeNotes = _activeNotes;
-
-
-#pragma mark Note Control
--(void)notesOn:(NSArray *)notes {
-    [self.activeNotes addObjectsFromArray:notes];
-    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
-    
-    for(NSNumber *note in notes) {
-        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
-            [gridActive addObject:pointVal];
-        }
-
-        //ACTIVATE THE MIDI NOTE
-        UInt32 noteNum = [note intValue];
-        UInt32 onVelocity = 127;
-        UInt32 noteCommand = 	kMIDIMessage_NoteOn << 4 | 0;
-        
-        OSStatus result = noErr;
-        require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand, noteNum, onVelocity, 0), logTheError);
-        
-    logTheError:
-        if (result != noErr) NSLog (@"Unable to start playing note %li. Error code: %d '%.4s'\n", noteNum, (int) result, (const char *)&result);
-    }
-    self.gridView.activeNotes = gridActive;
-}
--(void)notesOff:(NSArray *)notes {
-    [self.activeNotes addObjectsFromArray:notes];
-    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
-
-    for(NSNumber *note in notes) {
-        [self.activeNotes removeObject:note];
-        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
-            [gridActive removeObject:pointVal];
-        }
-        //DEACTIVATE THE MIDI NOTE
-        UInt32 noteNum = [note intValue];
-        UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
-        
-        OSStatus result = noErr;
-        require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand, noteNum, 0, 0), logTheError);
-        
-    logTheError:
-        if (result != noErr) NSLog (@"Unable to stop playing note %li. Error code: %d '%.4s'\n", noteNum, (int) result, (const char *)&result);
-    }
-    self.gridView.activeNotes = gridActive;
-}
-
-#pragma mark Touch Events
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    for(UITouch *touch in touches) {
-        CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        [self notesOn:[self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y]];
-    }
-}
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    for(UITouch *touch in touches) {
-        CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        NSArray *newNotes = [self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y];
-        NSMutableArray *notesToTurnOn = [[NSMutableArray alloc] init];
-        NSMutableArray *notesToTurnOff = [[NSMutableArray alloc] init];
-        
-        for(NSNumber *activeNote in self.activeNotes) {
-            if(![newNotes containsObject:activeNote]){
-                [notesToTurnOff addObject:activeNote];
-            }
-        }
-        for(NSNumber *newNote in newNotes) {
-            if(![self.activeNotes containsObject:newNote]) {
-                [notesToTurnOn addObject:newNote];
-            }
-        }
-
-        [self notesOn:notesToTurnOn];
-        [self notesOff:notesToTurnOff];
-    }
-}
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    for(UITouch *touch in touches) {
-        CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        [self notesOff:[self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y]];
-    }
-}
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    //same as touches ended?
-    [self touchesEnded:touches withEvent:event];
-}
--(CGPoint)gridLocationOfTouch:(UITouch *)touch {
-    CGFloat height = self.gridView.bounds.size.height;
-    CGFloat width = self.gridView.bounds.size.width;
-    CGFloat vInterval = height / (float) self.gridView.rows;
-    CGFloat hInterval = width / (float) self.gridView.columns;
-    
-    int xLoc = [touch locationInView:self.gridView].x / hInterval;
-    int yLoc = self.gridView.rows - [touch locationInView:self.gridView].y / vInterval;
-    return CGPointMake(xLoc, yLoc);
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    //Only Landscape
-    return ((interfaceOrientation == UIInterfaceOrientationLandscapeLeft) || (interfaceOrientation == UIInterfaceOrientationLandscapeRight));
-}
-
-#pragma mark GridDataSource
-- (NSString *)stringForCellAtXValue:(int) x YValue:(int) y {
-    NSArray *notes = [self.brain notesForRow:(y + [self.brain.startRow intValue])];
-    int note = [[notes objectAtIndex:x] intValue];
-    return [GridBrain nameForMidiNote:note showOctave:YES];
-}
+@synthesize graphSampleRate     = _graphSampleRate;
+@synthesize currentPresetLabel  = _currentPresetLabel;
+@synthesize presetOneButton     = _presetOneButton;
+@synthesize presetTwoButton     = _presetTwoButton;
+@synthesize lowNoteButton       = _lowNoteButton;
+@synthesize midNoteButton       = _midNoteButton;
+@synthesize highNoteButton      = _highNoteButton;
+@synthesize samplerUnit         = _samplerUnit;
+@synthesize ioUnit              = _ioUnit;
+@synthesize processingGraph     = _processingGraph;
 
 #pragma mark -
 #pragma mark Audio setup
@@ -280,16 +171,18 @@ enum {
         NSAssert (result == noErr, @"Unable to start audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
         
         // Print out the graph to the console
-        CAShow (graph); 
+        CAShow (graph);
     }
 }
 
-#pragma mark Load AUPreset Functions
-- (IBAction)loadPianoPreset:(id)sender {
+
+// Load the Trombone preset
+- (IBAction)loadPresetOne:(id)sender {
     
-	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Piano" ofType:@"aupreset"]];
+	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Trombone" ofType:@"aupreset"]];
 	if (presetURL) {
 		NSLog(@"Attempting to load preset '%@'\n", [presetURL description]);
+        self.currentPresetLabel.text = @"Trombone";
 	}
 	else {
 		NSLog(@"COULD NOT GET PRESET PATH!");
@@ -297,12 +190,14 @@ enum {
     
 	[self loadSynthFromPresetURL: presetURL];
 }
-- (IBAction)loadVibraphonePreset:(id)sender {
+
+// Load the Vibraphone preset
+- (IBAction)loadPresetTwo:(id)sender {
     
 	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Vibraphone" ofType:@"aupreset"]];
 	if (presetURL) {
 		NSLog(@"Attempting to load preset '%@'\n", [presetURL description]);
-	}
+        self.currentPresetLabel.text = @"Vibraphone";	}
 	else {
 		NSLog(@"COULD NOT GET PRESET PATH!");
 	}
@@ -395,7 +290,90 @@ enum {
     return YES;
 }
 
-//AUGraph control
+
+#pragma mark -
+#pragma mark Audio control
+// Play the low note
+- (IBAction) startPlayLowNote:(id)sender {
+    
+	UInt32 noteNum = kLowNote;
+	UInt32 onVelocity = 127;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOn << 4 | 0;
+    
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand, noteNum, onVelocity, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to start playing the low note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
+}
+
+// Stop the low note
+- (IBAction) stopPlayLowNote:(id)sender {
+    
+	UInt32 noteNum = kLowNote;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
+	
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent (self.samplerUnit, noteCommand, noteNum, 0, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to stop playing the low note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
+}
+
+// Play the mid note
+- (IBAction) startPlayMidNote:(id)sender {
+    
+	UInt32 noteNum = kMidNote;
+	UInt32 onVelocity = 127;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOn << 4 | 0;
+	
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent(self.samplerUnit, noteCommand, noteNum, onVelocity, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to start playing the mid note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
+}
+
+// Stop the mid note
+- (IBAction) stopPlayMidNote:(id)sender {
+    
+	UInt32 noteNum = kMidNote;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
+	
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent(self.samplerUnit, noteCommand, noteNum, 0, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to stop playing the mid note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
+}
+
+// Play the high note
+- (IBAction) startPlayHighNote:(id)sender {
+    
+	UInt32 noteNum = kHighNote;
+	UInt32 onVelocity = 127;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOn << 4 | 0;
+	
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent(self.samplerUnit, noteCommand, noteNum, onVelocity, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to start playing the high note. Error code: %d '%.4s'\n", (int) result, (const char *)&result);
+}
+
+// Stop the high note
+- (IBAction)stopPlayHighNote:(id)sender {
+    
+	UInt32 noteNum = kHighNote;
+	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
+	
+    OSStatus result = noErr;
+	require_noerr (result = MusicDeviceMIDIEvent(self.samplerUnit, noteCommand, noteNum, 0, 0), logTheError);
+    
+logTheError:
+    if (result != noErr) NSLog (@"Unable to stop playing the high note. Error code: %d '%.4s'", (int) result, (const char *)&result);
+}
+
 // Stop the audio processing graph
 - (void) stopAudioProcessingGraph {
     
@@ -411,6 +389,8 @@ enum {
 	if (self.processingGraph) result = AUGraphStart (self.processingGraph);
     NSAssert (result == noErr, @"Unable to restart the audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
 }
+
+
 #pragma mark -
 #pragma mark Audio session delegate methods
 
@@ -418,7 +398,9 @@ enum {
 - (void) beginInterruption {
     
     // Stop any notes that are currently playing.
-    [self notesOff:self.activeNotes];
+    [self stopPlayLowNote: self];
+    [self stopPlayMidNote: self];
+    [self stopPlayHighNote: self];
     
     // Interruptions do not put an AUGraph object into a "stopped" state, so
     //    do that here.
@@ -480,8 +462,9 @@ enum {
 
 - (void) handleResigningActive: (id) notification {
     
-    [self notesOff:self.activeNotes];
-
+    [self stopPlayLowNote: self];
+    [self stopPlayMidNote: self];
+    [self stopPlayHighNote: self];
     [self stopAudioProcessingGraph];
 }
 
@@ -489,23 +472,6 @@ enum {
 - (void) handleBecomingActive: (id) notification {
     
     [self restartAudioProcessingGraph];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-	self.brain = [[GridBrain alloc] init];
-    self.gridView.rows = [self.brain.numRows intValue];
-    self.gridView.columns = (self.brain.scale.count + 1);
-    self.gridView.dataSource = self;
-    self.activeNotes = [[NSMutableArray alloc] init];
-    
-    //Audio stuff:
-    [self loadVibraphonePreset:self];
-    
-    [self registerForUIApplicationNotifications];
-
 }
 
 - (id) initWithNibName: (NSString *) nibNameOrNil bundle: (NSBundle *) nibBundleOrNil {
@@ -528,6 +494,42 @@ enum {
     [self configureAndStartAudioProcessingGraph: self.processingGraph];
     
     return self;
+}
+
+
+- (void) viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    // Load the Trombone preset so the app is ready to play upon launch.
+    [self loadPresetOne: self];
+    [self registerForUIApplicationNotifications];
+}
+
+- (void) viewDidUnload {
+    
+    self.currentPresetLabel = nil;
+    self.presetOneButton    = nil;
+	self.presetTwoButton    = nil;
+	self.lowNoteButton      = nil;
+	self.midNoteButton      = nil;
+	self.highNoteButton     = nil;
+    
+    [super viewDidUnload];
+}
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    
+    // Return YES for supported orientations
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void) didReceiveMemoryWarning {
+    
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 
