@@ -44,9 +44,9 @@
         _chordInKey = [NSNumber numberWithBool:YES];
         
         //Default row interval is an octave
-        _rowInterval = [NSNumber numberWithInt:13];
+        _rowInterval = [NSNumber numberWithInt:3];
         //Rows stay in key by default
-        _rowInKey = [NSNumber numberWithBool:NO];
+        _rowInKey = [NSNumber numberWithBool:YES];
         
         //Default starting row is 2 octaves below C0
         _startOctave = [NSNumber numberWithInt:3];
@@ -181,28 +181,19 @@
     [notes addObject:[NSNumber numberWithInt:base]];
     if(self.chord.count > 1) {
         if([self.chordInKey boolValue]) {
-            //determine where in the scale we are
-            int normalizedBase = base % 12;
-            NSMutableArray *normalizedBaseRow = [[self baseRowAdjustedForOctave:NO] mutableCopy];
-            //adjust base row to match the played note (if note is not in normal scale, then the base row we build the chord from needs to be adjusted)
-            while([normalizedBaseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] == NSNotFound) {
-                for(int i = 0; i < [normalizedBaseRow count]; i++) {
-                    //since objective C is stupid sometimes, this is just incrementing the whole base row up by one half step.
-                    [normalizedBaseRow replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:([[normalizedBaseRow objectAtIndex:i] intValue] + 1)]];
-                }
-            }
+            NSArray *row = [self.rows objectAtIndex:y];
             //determine the number of octaves up the base note is
-            int octavesUp = (base - normalizedBase) / self.octaveJump;
+            int octavesUp = 0;
             //get index of where we are in scale
-            int scaleIndex = [normalizedBaseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]];
+            int scaleIndex = [row indexOfObject:[NSNumber numberWithInt:base]];
             //add notes
             for(int i = 1; i < self.chord.count; i++) {
                 scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]);
-                if(scaleIndex > (normalizedBaseRow.count-1)) {
+                if(scaleIndex > (row.count-1)) {
                     octavesUp++;
-                    scaleIndex = (scaleIndex + 1) % normalizedBaseRow.count;
+                    scaleIndex = (scaleIndex + 1) % row.count;
                 }
-                [notes addObject:[NSNumber numberWithInt:([[normalizedBaseRow objectAtIndex:scaleIndex] intValue] + octavesUp * self.octaveJump) ]];
+                [notes addObject:[NSNumber numberWithInt:([[row objectAtIndex:scaleIndex] intValue] + octavesUp * self.octaveJump) ]];
             }
             
             
@@ -215,6 +206,23 @@
                 }
                 [notes addObject:[NSNumber numberWithInt:base]];
                 scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]) % self.scale.count;
+            }
+             */
+            
+            //this version binds it to the row, which isn't always the scale
+            /*
+            //add notes
+            int scaleIndex = x;
+            int rowIndex = y;
+            NSArray *row = [self.rows objectAtIndex:rowIndex];
+            for(int i = 1; i < self.chord.count; i++) {
+                scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]);
+                if(scaleIndex > (row.count-1)) {
+                    rowIndex++;
+                    row = [self.rows objectAtIndex:rowIndex];
+                    scaleIndex = (scaleIndex + 1) % row.count;
+                }
+                [notes addObject:[NSNumber numberWithInt:([[row objectAtIndex:scaleIndex] intValue]) ]];
             }
              */
         } else {
