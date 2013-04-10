@@ -146,7 +146,7 @@ enum {
 
 #pragma mark GridDataSource
 - (NSString *)stringForCellAtXValue:(int) x YValue:(int) y {
-    NSArray *notes = [self.brain notesForRow:(y + [self.brain.startRow intValue])];
+    NSArray *notes = [self.brain notesForRow:(y)];
     int note = [[notes objectAtIndex:x] intValue];
     return [GridBrain nameForMidiNote:note showOctave:YES];
 }
@@ -503,6 +503,7 @@ enum {
     
     //Audio stuff:
     [self loadVibraphonePreset:self];
+    [self initializeAudioSession];
     
     [self registerForUIApplicationNotifications];
 
@@ -517,6 +518,12 @@ enum {
         return nil;
     }
     
+    [self initializeAudioSession];
+    
+    return self;
+}
+
+-(void)initializeAudioSession {
     // Set up the audio session for this app, in the process obtaining the
     // hardware sample rate for use in the audio processing graph.
     BOOL audioSessionActivated = [self setupAudioSession];
@@ -526,8 +533,6 @@ enum {
     // into the processingGraph and samplerUnit instance variables.
     [self createAUGraph];
     [self configureAndStartAudioProcessingGraph: self.processingGraph];
-    
-    return self;
 }
 
 

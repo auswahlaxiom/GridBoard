@@ -179,10 +179,10 @@ enum {
 // Load the Trombone preset
 - (IBAction)loadPresetOne:(id)sender {
     
-	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Trombone" ofType:@"aupreset"]];
+	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Piano" ofType:@"aupreset"]];
 	if (presetURL) {
 		NSLog(@"Attempting to load preset '%@'\n", [presetURL description]);
-        self.currentPresetLabel.text = @"Trombone";
+        self.currentPresetLabel.text = @"Piano";
 	}
 	else {
 		NSLog(@"COULD NOT GET PRESET PATH!");
@@ -500,6 +500,16 @@ logTheError:
 - (void) viewDidLoad {
     
     [super viewDidLoad];
+    // Set up the audio session for this app, in the process obtaining the
+    // hardware sample rate for use in the audio processing graph.
+    BOOL audioSessionActivated = [self setupAudioSession];
+    NSAssert (audioSessionActivated == YES, @"Unable to set up audio session.");
+    
+    // Create the audio processing graph; place references to the graph and to the Sampler unit
+    // into the processingGraph and samplerUnit instance variables.
+    [self createAUGraph];
+    [self configureAndStartAudioProcessingGraph: self.processingGraph];
+
     
     // Load the Trombone preset so the app is ready to play upon launch.
     [self loadPresetOne: self];

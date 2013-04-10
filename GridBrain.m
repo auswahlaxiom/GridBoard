@@ -16,11 +16,14 @@
  */
 @property (strong, nonatomic)NSMutableArray *rows;
 
+//this is 
+@property int octaveJump;
+
 @end
 
 @implementation GridBrain
 
-@synthesize scale = _scale, key = _key, rows = _rows, chord = _chord, chordInKey = _chordInKey, rowInterval = _rowInterval, rowInKey = _rowInKey, baseRow = _baseRow, startRow = _startRow, numRows = _numRows;
+@synthesize scale = _scale, key = _key, rows = _rows, chord = _chord, chordInKey = _chordInKey, rowInterval = _rowInterval, rowInKey = _rowInKey, baseRow = _baseRow, startOctave = _startOctave, numRows = _numRows, octaveJump = _octaveJump;
 
 
 -(id)init{
@@ -35,23 +38,29 @@
         _key = [NSNumber numberWithInt:0];
         
         //Default chord is the base note
-        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
+        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:2],[NSNumber numberWithInt:2],
                   nil];
         //Chords will be forced to stay in key by default
         _chordInKey = [NSNumber numberWithBool:YES];
         
         //Default row interval is an octave
-        _rowInterval = [NSNumber numberWithInt:3];
+        _rowInterval = [NSNumber numberWithInt:13];
         //Rows stay in key by default
-        _rowInKey = [NSNumber numberWithBool:YES];
+        _rowInKey = [NSNumber numberWithBool:NO];
         
         //Default starting row is 2 octaves below C0
-        _startRow = [NSNumber numberWithInt:0];
+        _startOctave = [NSNumber numberWithInt:3];
         //Default number of rows to display is 6
         _numRows = [NSNumber numberWithInt:6];
         
+        //Set octave jump
+        _octaveJump = 0;
+        for(NSNumber *num in _scale) {
+            _octaveJump += [num intValue];
+        }
+        
         //Set up base row:
-        [self resetBaseRow];
+        _baseRow = [self baseRowAdjustedForOctave:YES];
         
         [self rebuildRows];
     }
@@ -63,29 +72,34 @@
     if(root > 11) {
         //normalize root to the lowest midi octave
         root = root % 12;
-        _key = [NSNumber numberWithInt:root];
-    } else {
-        _key = key;
     }
-    [self resetBaseRow];
+    
+    _key = [NSNumber numberWithInt:root];
+
+    self.baseRow = [self baseRowAdjustedForOctave:YES];
+    [self rebuildRows];
 }
 
--(void)resetBaseRow {
+-(NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave {
     NSMutableArray *mutableRow = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
-    int prevNote = [self.key intValue];
+    
+    //seed the previous note with the normalized root note of key
+    int prevNote = [self.key intValue] % 12;
+    //adjust if necessary
+    if(adjustOctave) {
+        
+        prevNote += self.octaveJump * [self.startOctave intValue];
+    }
+
     [mutableRow addObject:[NSNumber numberWithInt:prevNote]];
     for(int i = 1; i < self.scale.count; i++) {
         prevNote += [[self.scale objectAtIndex:i] intValue];
         [mutableRow addObject:[NSNumber numberWithInt:prevNote]];
     }
-    //Add final note in the "octave"
-    int totalOffset = 0;
-    for(NSNumber *num in self.scale) {
-        totalOffset += [num intValue];
-    }
+
     int firstNote = [[mutableRow objectAtIndex:0] intValue];
-    [mutableRow addObject:[NSNumber numberWithInt:(totalOffset + firstNote)]];
-    self.baseRow = [mutableRow copy];
+    [mutableRow addObject:[NSNumber numberWithInt:(self.octaveJump + firstNote)]];
+    return [mutableRow copy];
 }
 
 +(NSDictionary *)midiNotes {
@@ -116,18 +130,13 @@
 }
 
 -(void)rebuildRows {
-    self.rows = [[NSMutableArray alloc] initWithCapacity:([self.startRow intValue] + [self.numRows intValue])];
+    self.rows = [[NSMutableArray alloc] initWithCapacity:([self.numRows intValue])];
     //initialize with base row first
     [self.rows addObject:self.baseRow];
     
-    //calc total offset of the scale
-    int totalOffset = 0;
-    for(NSNumber *num in self.scale) {
-        totalOffset += [num intValue];
-    }
 
     NSMutableArray *notes = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
-    for(int row = 1; row < [self.startRow intValue] + [self.numRows intValue]; row++) {
+    for(int row = 1; row < [self.numRows intValue]; row++) {
         if([self.rowInKey boolValue]) {
             NSArray *prevRow = [self.rows objectAtIndex:(row-1)];
 
@@ -146,7 +155,7 @@
             }
             //Add the final note in the "octave", which is the first note in the row and the total offset of the scale
             int firstNote = [[notes objectAtIndex:0] intValue];
-            [notes addObject:[NSNumber numberWithInt:(totalOffset + firstNote)]];
+            [notes addObject:[NSNumber numberWithInt:(self.octaveJump + firstNote)]];
         } else {
             for(NSNumber *note in self.baseRow) {
                 int noteWithOffset = [note intValue] + [self.rowInterval intValue] * row;
@@ -174,9 +183,31 @@
         if([self.chordInKey boolValue]) {
             //determine where in the scale we are
             int normalizedBase = base % 12;
-            while([self.baseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] == NSNotFound) {
-                normalizedBase++;
+            NSMutableArray *normalizedBaseRow = [[self baseRowAdjustedForOctave:NO] mutableCopy];
+            //adjust base row to match the played note (if note is not in normal scale, then the base row we build the chord from needs to be adjusted)
+            while([normalizedBaseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] == NSNotFound) {
+                for(int i = 0; i < [normalizedBaseRow count]; i++) {
+                    //since objective C is stupid sometimes, this is just incrementing the whole base row up by one half step.
+                    [normalizedBaseRow replaceObjectAtIndex:i withObject:[NSNumber numberWithInt:([[normalizedBaseRow objectAtIndex:i] intValue] + 1)]];
+                }
             }
+            //determine the number of octaves up the base note is
+            int octavesUp = (base - normalizedBase) / self.octaveJump;
+            //get index of where we are in scale
+            int scaleIndex = [normalizedBaseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]];
+            //add notes
+            for(int i = 1; i < self.chord.count; i++) {
+                scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]);
+                if(scaleIndex > (normalizedBaseRow.count-1)) {
+                    octavesUp++;
+                    scaleIndex = (scaleIndex + 1) % normalizedBaseRow.count;
+                }
+                [notes addObject:[NSNumber numberWithInt:([[normalizedBaseRow objectAtIndex:scaleIndex] intValue] + octavesUp * self.octaveJump) ]];
+            }
+            
+            
+            //old version that didn't work quite right
+            /*
             int scaleIndex = [self.baseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] + 1;
             for(int i = 1; i < self.chord.count; i++) {
                 for(int j = 0; j < [[self.chord objectAtIndex:i] intValue]; j++) {
@@ -185,6 +216,7 @@
                 [notes addObject:[NSNumber numberWithInt:base]];
                 scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]) % self.scale.count;
             }
+             */
         } else {
             for(int i = 1; i < self.chord.count; i++) {
                 base += [[self.chord objectAtIndex:i] intValue];
@@ -201,7 +233,7 @@
     for(y = 0; y < self.rows.count; y++) {
         for(x = 0; x <= self.scale.count; x++) {
             if([[[self.rows objectAtIndex:y] objectAtIndex:x] intValue] == note) {
-                [locs addObject:[NSValue valueWithCGPoint: CGPointMake(x - [self.startRow intValue], y)]];
+                [locs addObject:[NSValue valueWithCGPoint: CGPointMake(x, y)]];
             }
         }
     }

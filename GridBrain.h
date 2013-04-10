@@ -50,9 +50,11 @@
  */
 @property (strong, nonatomic)NSNumber *rowInKey;
 
-/* Specifies the row at which the grid starts, 0 is lowest
+/* Specifies the octave at which the grid starts, 0 is lowest
+ * Adds to the base note (key) the total MIDI steps in the scale times startOctave
+ * 
  */
-@property (strong, nonatomic)NSNumber *startRow;
+@property (strong, nonatomic)NSNumber *startOctave;
 
 /* Specifies number of rows to display
  */
