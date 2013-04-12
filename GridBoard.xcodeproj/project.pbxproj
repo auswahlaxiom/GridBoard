@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C173B011717916600625BF2 /* GridConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C173B001717916600625BF2 /* GridConfigViewController.m */; };
 		1C1FAC0C1709F0AC00BCF2E9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1FAC0B1709F0AC00BCF2E9 /* UIKit.framework */; };
 		1C1FAC0E1709F0AC00BCF2E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1FAC0D1709F0AC00BCF2E9 /* Foundation.framework */; };
 		1C1FAC101709F0AC00BCF2E9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1FAC0F1709F0AC00BCF2E9 /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C173AFF1717916600625BF2 /* GridConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridConfigViewController.h; sourceTree = "<group>"; };
+		1C173B001717916600625BF2 /* GridConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridConfigViewController.m; sourceTree = "<group>"; };
 		1C1FAC071709F0AC00BCF2E9 /* GridBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GridBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C1FAC0B1709F0AC00BCF2E9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		1C1FAC0D1709F0AC00BCF2E9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -157,6 +160,8 @@
 			children = (
 				1C3EB76C170BFED1000A6AED /* SampleViewController.h */,
 				1C3EB76D170BFED1000A6AED /* SampleViewController.m */,
+				1C173AFF1717916600625BF2 /* GridConfigViewController.h */,
+				1C173B001717916600625BF2 /* GridConfigViewController.m */,
 				1C1FAC44170A91C900BCF2E9 /* GridView */,
 			);
 			name = "View Controllers";
@@ -299,6 +304,7 @@
 				1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */,
 				1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */,
 				1C3EB76E170BFED2000A6AED /* SampleViewController.m in Sources */,
+				1C173B011717916600625BF2 /* GridConfigViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

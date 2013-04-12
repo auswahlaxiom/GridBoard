@@ -7,6 +7,7 @@
 //
 
 #import "GridViewController.h"
+#import "GridConfigViewController.h"
 
 //For debug from sample code
 #import <AssertMacros.h>
@@ -40,6 +41,14 @@ enum {
 @synthesize brain = _brain;
 @synthesize gridView = _gridView;
 @synthesize activeNotes = _activeNotes;
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString: @"Config"]) {
+        GridConfigViewController *dest = (GridConfigViewController *)segue.destinationViewController;
+        dest.brain = self.brain;
+        dest.gridView = self.gridView;
+    }
+}
 
 
 #pragma mark Note Control

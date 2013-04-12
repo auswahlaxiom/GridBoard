@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2840" systemVersion="11G63" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="dvL-NV-OUJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1926"/>
     </dependencies>
     <scenes>
-        <!--Grid View Controller-->
+        <!--Grid View Controller - GridBoard-->
         <scene sceneID="4">
             <objects>
                 <viewController id="2" customClass="GridViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5">
-                        <rect key="frame" x="0.0" y="20" width="1024" height="748"/>
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" id="Z88-Va-Sdb" customClass="GridView">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="748"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.84795346467391308" green="0.84795346467391308" blue="0.84795346467391308" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <navigationItem key="navigationItem" title="GridBoard" id="vH4-B5-gUd">
+                        <barButtonItem key="rightBarButtonItem" title="Config" id="nSl-Ga-To0">
+                            <connections>
+                                <segue destination="zuI-u9-8cU" kind="push" identifier="Config" id="pfa-aV-fwv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="gridView" destination="Z88-Va-Sdb" id="ZLG-uH-mRl"/>
@@ -28,15 +35,265 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1122" y="15"/>
+        </scene>
+        <!--Grid Config View Controller-->
+        <scene sceneID="Pej-wX-a5w">
+            <objects>
+                <viewController id="zuI-u9-8cU" customClass="GridConfigViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fxf-bb-sNe">
+                        <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Scale:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OLr-y6-1oT">
+                                <rect key="frame" x="20" y="20" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Key:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B24-Oi-DnB">
+                                <rect key="frame" x="20" y="49" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Rows:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yZN-jF-BA1">
+                                <rect key="frame" x="20" y="78" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Base Octave:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3NO-tJ-PFn">
+                                <rect key="frame" x="20" y="165" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Chord:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bG9-AM-cx3">
+                                <rect key="frame" x="20" y="194" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Row Interval:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CHU-mP-Sul">
+                                <rect key="frame" x="20" y="107" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Row In Key:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J8U-WK-l7W">
+                                <rect key="frame" x="20" y="136" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Chord In Key:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jiV-dS-MF5">
+                                <rect key="frame" x="20" y="223" width="109" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Nxf-nz-mBF">
+                                <rect key="frame" x="137" y="223" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="chordInKeyChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="OB3-X1-g8r"/>
+                                </connections>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Gx6-NP-291">
+                                <rect key="frame" x="137" y="136" width="79" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="rowInKeyChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="wyD-Jz-hkE"/>
+                                </connections>
+                            </switch>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KnF-04-ryg">
+                                <rect key="frame" x="137" y="16" width="179" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Major"/>
+                                    <segment title="Minor"/>
+                                    <segment title="Custom"/>
+                                </segments>
+                                <connections>
+                                    <action selector="scaleSelector:" destination="zuI-u9-8cU" eventType="valueChanged" id="N6I-5M-SDF"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="U1z-lV-GzO">
+                                <rect key="frame" x="324" y="15" width="150" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zuI-u9-8cU" id="T1R-oG-IWW"/>
+                                </connections>
+                            </textField>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="6" minValue="1" maxValue="10" id="85c-rt-CPh">
+                                <rect key="frame" x="135" y="78" width="183" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="rowsChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="0ER-Jp-BHn"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="11" id="B58-Nr-GZA">
+                                <rect key="frame" x="135" y="53" width="183" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="keyChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="l3d-eG-Dmy"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="C" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bgX-PJ-etr">
+                                <rect key="frame" x="324" y="53" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="6" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Aiy-VT-zeL">
+                                <rect key="frame" x="324" y="78" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="7" minValue="1" maxValue="24" id="VjB-E6-hF2">
+                                <rect key="frame" x="135" y="107" width="183" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="rowIntervalChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="dUC-j9-3ot"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="7" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dfe-Je-8nB">
+                                <rect key="frame" x="324" y="107" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="4" minValue="0.0" maxValue="10" id="I4y-Jo-6my">
+                                <rect key="frame" x="135" y="165" width="183" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="baseOctaveChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="L5m-Mv-4Zc"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Glw-3k-PIb">
+                                <rect key="frame" x="324" y="165" width="49" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="6iy-6W-vwC">
+                                <rect key="frame" x="137" y="190" width="179" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="None"/>
+                                    <segment title="Major"/>
+                                    <segment title="Custom"/>
+                                </segments>
+                                <connections>
+                                    <action selector="chordChanged:" destination="zuI-u9-8cU" eventType="valueChanged" id="qB6-en-EeD"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="fvI-JP-eb0">
+                                <rect key="frame" x="324" y="190" width="150" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zuI-u9-8cU" id="qWT-VN-ur8"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="baseOctaveLabel" destination="Glw-3k-PIb" id="Zry-qF-iLr"/>
+                        <outlet property="baseOctaveSlider" destination="I4y-Jo-6my" id="6K0-OR-uEz"/>
+                        <outlet property="chordInKeySwitch" destination="Nxf-nz-mBF" id="gnQ-dN-bwl"/>
+                        <outlet property="chordSegment" destination="6iy-6W-vwC" id="rVb-0r-Ws2"/>
+                        <outlet property="chordTextField" destination="fvI-JP-eb0" id="TkK-J8-EFf"/>
+                        <outlet property="keyLabel" destination="bgX-PJ-etr" id="YXN-JW-31v"/>
+                        <outlet property="keySlider" destination="B58-Nr-GZA" id="6H4-f4-duc"/>
+                        <outlet property="rowInKeySwitch" destination="Gx6-NP-291" id="cQ0-6u-DaG"/>
+                        <outlet property="rowIntervalLabel" destination="Dfe-Je-8nB" id="h9o-Cc-O5f"/>
+                        <outlet property="rowIntervalSlider" destination="VjB-E6-hF2" id="SaW-xy-Ux4"/>
+                        <outlet property="rowsLabel" destination="Aiy-VT-zeL" id="cae-Wm-PNk"/>
+                        <outlet property="rowsSlider" destination="85c-rt-CPh" id="wrb-Jm-glf"/>
+                        <outlet property="scaleSegment" destination="KnF-04-ryg" id="5p0-5f-ebF"/>
+                        <outlet property="scaleTextField" destination="U1z-lV-GzO" id="KGn-qV-iul"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhh-XJ-alJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2269" y="15"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="15Z-fP-Fxf">
+            <objects>
+                <navigationController id="dvL-NV-OUJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fx2-a6-0np">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="4y1-jd-yvN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SbI-yi-My4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-659" y="-142"/>
         </scene>
     </scenes>
     <classes>
+        <class className="GridConfigViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GridConfigViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="baseOctaveChanged:" candidateClass="UISlider"/>
+                <relationship kind="action" name="chordChanged:" candidateClass="UISegmentedControl"/>
+                <relationship kind="action" name="chordInKeyChanged:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="keyChanged:" candidateClass="UISlider"/>
+                <relationship kind="action" name="rowInKeyChanged:" candidateClass="UISwitch"/>
+                <relationship kind="action" name="rowIntervalChanged:" candidateClass="UISlider"/>
+                <relationship kind="action" name="rowsChanged:" candidateClass="UISlider"/>
+                <relationship kind="action" name="scaleSelector:" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="baseOctaveLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="baseOctaveSlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="chordInKeySwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="chordSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="chordTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="keyLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="keySlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="rowInKeySwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="rowIntervalLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rowIntervalSlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="rowsLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="rowsSlider" candidateClass="UISlider"/>
+                <relationship kind="outlet" name="scaleSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="scaleTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
         <class className="GridView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GridView.h"/>
         </class>
         <class className="GridViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GridViewController.h"/>
             <relationships>
+                <relationship kind="action" name="loadPianoPreset:"/>
+                <relationship kind="action" name="loadVibraphonePreset:"/>
                 <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
             </relationships>
         </class>

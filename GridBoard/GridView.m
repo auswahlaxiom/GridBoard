@@ -10,7 +10,7 @@
 
 @implementation GridView
 
-@synthesize activeNotes = _activeNotes;
+@synthesize activeNotes = _activeNotes, rows = _rows, columns = _columns;
 
 -(void)setActiveNotes:(NSArray *)activeNotes {
     if(_activeNotes != activeNotes) {
@@ -18,7 +18,18 @@
         [self setNeedsDisplay];
     }
 }
-
+-(void)setColumns:(int)columns {
+    if(_columns != columns) {
+        _columns = columns;
+        [self setNeedsDisplay];
+    }
+}
+-(void)setRows:(int)rows {
+    if(_rows != rows) {
+        _rows = rows;
+        [self setNeedsDisplay];
+    }
+}
 - (void)awakeFromNib
 {
     [self setup]; // get initialized when we come out of a storyboard

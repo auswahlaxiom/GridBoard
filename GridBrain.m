@@ -38,7 +38,7 @@
         _key = [NSNumber numberWithInt:0];
         
         //Default chord is the base note
-        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],[NSNumber numberWithInt:2],[NSNumber numberWithInt:2],
+        _chord = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
                   nil];
         //Chords will be forced to stay in key by default
         _chordInKey = [NSNumber numberWithBool:YES];
@@ -49,7 +49,7 @@
         _rowInKey = [NSNumber numberWithBool:YES];
         
         //Default starting row is 2 octaves below C0
-        _startOctave = [NSNumber numberWithInt:3];
+        _startOctave = [NSNumber numberWithInt:4];
         //Default number of rows to display is 6
         _numRows = [NSNumber numberWithInt:6];
         
@@ -67,19 +67,6 @@
     return self;
 }
 
--(void)setKey:(NSNumber *)key {
-    int root = [key intValue];
-    if(root > 11) {
-        //normalize root to the lowest midi octave
-        root = root % 12;
-    }
-    
-    _key = [NSNumber numberWithInt:root];
-
-    self.baseRow = [self baseRowAdjustedForOctave:YES];
-    [self rebuildRows];
-}
-
 -(NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave {
     NSMutableArray *mutableRow = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
     
@@ -88,7 +75,7 @@
     //adjust if necessary
     if(adjustOctave) {
         
-        prevNote += self.octaveJump * [self.startOctave intValue];
+        prevNote += 12 * [self.startOctave intValue];
     }
 
     [mutableRow addObject:[NSNumber numberWithInt:prevNote]];
@@ -122,7 +109,7 @@
 +(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave {
     NSString *noteName = [[GridBrain midiNotes] objectForKey:[NSNumber numberWithInt:(note % 12)]];
     if(octave) {
-        int midiOctave = -5; //notes 0 thru 11 are in the -5th octave as defined by MIDI
+        int midiOctave = -2; //notes 0 thru 11 are in the -5th octave as defined by MIDI
         midiOctave += note / 12;
         noteName = [noteName stringByAppendingString:[NSString stringWithFormat:@" %i", midiOctave]];
     }
@@ -246,6 +233,47 @@
         }
     }
     return locs;
+}
+
+#pragma mark Setters
+-(void)setKey:(NSNumber *)key {
+    int root = [key intValue];
+    if(root > 11) {
+        //normalize root to the lowest midi octave
+        root = root % 12;
+    }
+    
+    _key = [NSNumber numberWithInt:root];
+    
+    [self rebuild];
+}
+-(void)setScale:(NSArray *)scale {
+    _scale = scale;
+    [self rebuild];
+}
+-(void)setRowInterval:(NSNumber *)rowInterval {
+    _rowInterval = rowInterval;
+    [self rebuild];
+}
+-(void)setRowInKey:(NSNumber *)rowInKey {
+    _rowInKey = rowInKey;
+    [self rebuild];
+}
+-(void)setStartOctave:(NSNumber *)startOctave {
+    _startOctave = startOctave;
+    [self rebuild];
+}
+-(void)setNumRows:(NSNumber *)numRows {
+    _numRows = numRows;
+    [self rebuild];
+}
+-(void)rebuild {
+    self.octaveJump = 0;
+    for(NSNumber *num in self.scale) {
+        self.octaveJump += [num intValue];
+    }
+    self.baseRow = [self baseRowAdjustedForOctave:YES];
+    [self rebuildRows];
 }
 
 @end
