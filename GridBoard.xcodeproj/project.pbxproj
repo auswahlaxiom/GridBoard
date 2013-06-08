@@ -19,9 +19,6 @@
 		1C1FAC221709F0AC00BCF2E9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC211709F0AC00BCF2E9 /* Default-568h@2x.png */; };
 		1C1FAC251709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC231709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard */; };
 		1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC261709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard */; };
-		1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */; };
-		1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC361709F73500BCF2E9 /* GridBrain.m */; };
-		1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC391709F78100BCF2E9 /* GridViewController.m */; };
 		1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C1FAC42170A4F1600BCF2E9 /* GridView.m */; };
 		1C3EB753170BF6BC000A6AED /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3EB752170BF6BC000A6AED /* AudioToolbox.framework */; };
 		1C3EB759170BF718000A6AED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C3EB758170BF718000A6AED /* AVFoundation.framework */; };
@@ -37,13 +34,15 @@
 		1C79BAA917638AAC004AF8A0 /* GuitarAcoustic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA417638AAB004AF8A0 /* GuitarAcoustic.sf2 */; };
 		1C79BAAA17638AAC004AF8A0 /* Dethmetal.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA517638AAB004AF8A0 /* Dethmetal.sf2 */; };
 		1C79BAAB17638AAC004AF8A0 /* BassTremolo.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA617638AAC004AF8A0 /* BassTremolo.sf2 */; };
-		1C79BAB417638B2B004AF8A0 /* EPSSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAB117638B2B004AF8A0 /* EPSSampler.m */; };
-		1C79BAB517638B2B004AF8A0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAB217638B2B004AF8A0 /* LICENSE */; };
-		1C79BAB617638B2B004AF8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAB317638B2B004AF8A0 /* README.md */; };
 		1C79BABA1763999D004AF8A0 /* ZFNumberBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAB91763999D004AF8A0 /* ZFNumberBag.m */; };
-		1CFF0E8D171899950045EDE3 /* GridBoard icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CFF0E8B171899950045EDE3 /* GridBoard icon.png */; };
-		1CFF0E8E171899950045EDE3 /* GridBoard icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CFF0E8C171899950045EDE3 /* GridBoard icon@2x.png */; };
-		1CFF0E91171899AC0045EDE3 /* tymoczko_fig3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1CFF0E90171899AC0045EDE3 /* tymoczko_fig3@2x.png */; };
+		1C79BAC01763BCC8004AF8A0 /* EPSSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */; };
+		1C79BAC21763BCC8004AF8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BABF1763BCC8004AF8A0 /* README.md */; };
+		1C79BAC51763BCF2004AF8A0 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAC41763BCF2004AF8A0 /* GridBrain.m */; };
+		1C79BAC81763BD13004AF8A0 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAC61763BD13004AF8A0 /* GridViewController.m */; };
+		1C79BACD1763BD27004AF8A0 /* GridBoard icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAC91763BD27004AF8A0 /* GridBoard icon.png */; };
+		1C79BACE1763BD27004AF8A0 /* GridBoard icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACA1763BD27004AF8A0 /* GridBoard icon@2x.png */; };
+		1C79BACF1763BD27004AF8A0 /* tymoczko_fig3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACB1763BD27004AF8A0 /* tymoczko_fig3.png */; };
+		1C79BAD01763BD27004AF8A0 /* tymoczko_fig3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACC1763BD27004AF8A0 /* tymoczko_fig3@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,11 +63,6 @@
 		1C1FAC211709F0AC00BCF2E9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1C1FAC241709F0AC00BCF2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		1C1FAC271709F0AC00BCF2E9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tymoczko_fig3.png; sourceTree = "<group>"; };
-		1C1FAC351709F73500BCF2E9 /* GridBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridBrain.h; path = ../GridBrain.h; sourceTree = "<group>"; };
-		1C1FAC361709F73500BCF2E9 /* GridBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridBrain.m; path = ../GridBrain.m; sourceTree = "<group>"; };
-		1C1FAC381709F78100BCF2E9 /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GridViewController.h; path = ../GridViewController.h; sourceTree = "<group>"; };
-		1C1FAC391709F78100BCF2E9 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GridViewController.m; path = ../GridViewController.m; sourceTree = "<group>"; };
 		1C1FAC41170A4F1600BCF2E9 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		1C1FAC42170A4F1600BCF2E9 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		1C3EB752170BF6BC000A6AED /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -91,15 +85,19 @@
 		1C79BAA417638AAB004AF8A0 /* GuitarAcoustic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = GuitarAcoustic.sf2; sourceTree = "<group>"; };
 		1C79BAA517638AAB004AF8A0 /* Dethmetal.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dethmetal.sf2; sourceTree = "<group>"; };
 		1C79BAA617638AAC004AF8A0 /* BassTremolo.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BassTremolo.sf2; sourceTree = "<group>"; };
-		1C79BAB017638B2B004AF8A0 /* EPSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPSSampler.h; sourceTree = "<group>"; };
-		1C79BAB117638B2B004AF8A0 /* EPSSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPSSampler.m; sourceTree = "<group>"; };
-		1C79BAB217638B2B004AF8A0 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		1C79BAB317638B2B004AF8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		1C79BAB81763999D004AF8A0 /* ZFNumberBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFNumberBag.h; sourceTree = "<group>"; };
 		1C79BAB91763999D004AF8A0 /* ZFNumberBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFNumberBag.m; sourceTree = "<group>"; };
-		1CFF0E8B171899950045EDE3 /* GridBoard icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridBoard icon.png"; sourceTree = "<group>"; };
-		1CFF0E8C171899950045EDE3 /* GridBoard icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GridBoard icon@2x.png"; sourceTree = "<group>"; };
-		1CFF0E90171899AC0045EDE3 /* tymoczko_fig3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tymoczko_fig3@2x.png"; sourceTree = "<group>"; };
+		1C79BABC1763BCC8004AF8A0 /* EPSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPSSampler.h; sourceTree = "<group>"; };
+		1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPSSampler.m; sourceTree = "<group>"; };
+		1C79BABF1763BCC8004AF8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		1C79BAC31763BCF2004AF8A0 /* GridBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBrain.h; sourceTree = "<group>"; };
+		1C79BAC41763BCF2004AF8A0 /* GridBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBrain.m; sourceTree = "<group>"; };
+		1C79BAC61763BD13004AF8A0 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
+		1C79BAC71763BD13004AF8A0 /* GridViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridViewController.h; sourceTree = "<group>"; };
+		1C79BAC91763BD27004AF8A0 /* GridBoard icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GridBoard icon.png"; path = "GridBoard/Images/GridBoard icon.png"; sourceTree = "<group>"; };
+		1C79BACA1763BD27004AF8A0 /* GridBoard icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GridBoard icon@2x.png"; path = "GridBoard/Images/GridBoard icon@2x.png"; sourceTree = "<group>"; };
+		1C79BACB1763BD27004AF8A0 /* tymoczko_fig3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tymoczko_fig3.png; path = GridBoard/Images/tymoczko_fig3.png; sourceTree = "<group>"; };
+		1C79BACC1763BD27004AF8A0 /* tymoczko_fig3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tymoczko_fig3@2x.png"; path = "GridBoard/Images/tymoczko_fig3@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,7 +150,7 @@
 		1C1FAC111709F0AC00BCF2E9 /* GridBoard */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BAB717638B30004AF8A0 /* EPSSampler */,
+				1C79BABB1763BCC7004AF8A0 /* EPSSampler */,
 				1C79BAAC17638AB6004AF8A0 /* Soundfonts */,
 				1C79BAA117638A90004AF8A0 /* AUPresets */,
 				1C79BA9B17638A74004AF8A0 /* Sounds */,
@@ -197,8 +195,8 @@
 		1C1FAC3C1709F7A500BCF2E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C1FAC351709F73500BCF2E9 /* GridBrain.h */,
-				1C1FAC361709F73500BCF2E9 /* GridBrain.m */,
+				1C79BAC31763BCF2004AF8A0 /* GridBrain.h */,
+				1C79BAC41763BCF2004AF8A0 /* GridBrain.m */,
 				1C79BAB81763999D004AF8A0 /* ZFNumberBag.h */,
 				1C79BAB91763999D004AF8A0 /* ZFNumberBag.m */,
 			);
@@ -219,10 +217,10 @@
 		1C3EB751170BF393000A6AED /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1CFF0E8B171899950045EDE3 /* GridBoard icon.png */,
-				1CFF0E8C171899950045EDE3 /* GridBoard icon@2x.png */,
-				1C1FAC331709F60600BCF2E9 /* tymoczko_fig3.png */,
-				1CFF0E90171899AC0045EDE3 /* tymoczko_fig3@2x.png */,
+				1C79BAC91763BD27004AF8A0 /* GridBoard icon.png */,
+				1C79BACA1763BD27004AF8A0 /* GridBoard icon@2x.png */,
+				1C79BACB1763BD27004AF8A0 /* tymoczko_fig3.png */,
+				1C79BACC1763BD27004AF8A0 /* tymoczko_fig3@2x.png */,
 			);
 			name = Resources;
 			path = ..;
@@ -242,10 +240,10 @@
 		1C79BA9A17638A28004AF8A0 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				1C79BAC61763BD13004AF8A0 /* GridViewController.m */,
+				1C79BAC71763BD13004AF8A0 /* GridViewController.h */,
 				1C173AFF1717916600625BF2 /* GridConfigViewController.h */,
 				1C173B001717916600625BF2 /* GridConfigViewController.m */,
-				1C1FAC381709F78100BCF2E9 /* GridViewController.h */,
-				1C1FAC391709F78100BCF2E9 /* GridViewController.m */,
 			);
 			name = Grid;
 			sourceTree = "<group>";
@@ -271,15 +269,14 @@
 			name = Soundfonts;
 			sourceTree = "<group>";
 		};
-		1C79BAB717638B30004AF8A0 /* EPSSampler */ = {
+		1C79BABB1763BCC7004AF8A0 /* EPSSampler */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BAB017638B2B004AF8A0 /* EPSSampler.h */,
-				1C79BAB117638B2B004AF8A0 /* EPSSampler.m */,
-				1C79BAB217638B2B004AF8A0 /* LICENSE */,
-				1C79BAB317638B2B004AF8A0 /* README.md */,
+				1C79BABC1763BCC8004AF8A0 /* EPSSampler.h */,
+				1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */,
+				1C79BABF1763BCC8004AF8A0 /* README.md */,
 			);
-			name = EPSSampler;
+			path = EPSSampler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -339,10 +336,6 @@
 				1C1FAC221709F0AC00BCF2E9 /* Default-568h@2x.png in Resources */,
 				1C1FAC251709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */,
-				1C1FAC341709F60600BCF2E9 /* tymoczko_fig3.png in Resources */,
-				1CFF0E8D171899950045EDE3 /* GridBoard icon.png in Resources */,
-				1CFF0E8E171899950045EDE3 /* GridBoard icon@2x.png in Resources */,
-				1CFF0E91171899AC0045EDE3 /* tymoczko_fig3@2x.png in Resources */,
 				1C79BA9C17638A74004AF8A0 /* Sounds in Resources */,
 				1C79BA9F17638A8B004AF8A0 /* Vibraphone.aupreset in Resources */,
 				1C79BAA017638A8B004AF8A0 /* Trombone.aupreset in Resources */,
@@ -351,8 +344,11 @@
 				1C79BAA917638AAC004AF8A0 /* GuitarAcoustic.sf2 in Resources */,
 				1C79BAAA17638AAC004AF8A0 /* Dethmetal.sf2 in Resources */,
 				1C79BAAB17638AAC004AF8A0 /* BassTremolo.sf2 in Resources */,
-				1C79BAB517638B2B004AF8A0 /* LICENSE in Resources */,
-				1C79BAB617638B2B004AF8A0 /* README.md in Resources */,
+				1C79BAC21763BCC8004AF8A0 /* README.md in Resources */,
+				1C79BACD1763BD27004AF8A0 /* GridBoard icon.png in Resources */,
+				1C79BACE1763BD27004AF8A0 /* GridBoard icon@2x.png in Resources */,
+				1C79BACF1763BD27004AF8A0 /* tymoczko_fig3.png in Resources */,
+				1C79BAD01763BD27004AF8A0 /* tymoczko_fig3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,16 +361,16 @@
 			files = (
 				1C1FAC181709F0AC00BCF2E9 /* main.m in Sources */,
 				1C1FAC1C1709F0AC00BCF2E9 /* AppDelegate.m in Sources */,
-				1C1FAC371709F73500BCF2E9 /* GridBrain.m in Sources */,
-				1C1FAC3A1709F78100BCF2E9 /* GridViewController.m in Sources */,
 				1C1FAC43170A4F1600BCF2E9 /* GridView.m in Sources */,
 				1C3EB76E170BFED2000A6AED /* SampleViewController.m in Sources */,
 				1C173B011717916600625BF2 /* GridConfigViewController.m in Sources */,
 				1C79BA92176389A6004AF8A0 /* KeyActiveIndicator.m in Sources */,
 				1C79BA95176389D1004AF8A0 /* KeyConfigViewController.m in Sources */,
 				1C79BA9817638A19004AF8A0 /* KeyViewController.m in Sources */,
-				1C79BAB417638B2B004AF8A0 /* EPSSampler.m in Sources */,
 				1C79BABA1763999D004AF8A0 /* ZFNumberBag.m in Sources */,
+				1C79BAC01763BCC8004AF8A0 /* EPSSampler.m in Sources */,
+				1C79BAC51763BCF2004AF8A0 /* GridBrain.m in Sources */,
+				1C79BAC81763BD13004AF8A0 /* GridViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
