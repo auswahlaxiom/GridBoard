@@ -8,7 +8,7 @@
 
 #import "GridViewController.h"
 #import "GridConfigViewController.h"
-#import "EPSSampler.h"
+#import "GridSampler.h"
 
 //For debug from sample code
 #import <AssertMacros.h>
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *activeNotes;
 
 //Shiney new synthesizer
-@property (strong, nonatomic) EPSSampler *sampler;
+@property (strong, nonatomic) GridSampler *sampler;
 
 @end
 
@@ -262,7 +262,7 @@
     [super viewDidLoad];
     
     NSURL *aupURL = [[NSBundle mainBundle] URLForResource:@"Trombone" withExtension:@"aupreset"];
-    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
+    self.sampler = [[GridSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
     
 	self.brain = [[GridBrain alloc] init];
     self.gridView.rows = [self.brain.numRows intValue];

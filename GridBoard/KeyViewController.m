@@ -9,7 +9,7 @@
 #import "KeyViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "KeyActiveIndicator.h"
-#import "EPSSampler.h"
+#import "GridSampler.h"
 
 
 @interface KeyViewController ()
@@ -19,7 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *blackKeys;
 @property (strong, nonatomic) NSMutableArray *keyLabels;
 
-@property (strong, nonatomic) EPSSampler *sampler;
+@property (strong, nonatomic) GridSampler *sampler;
 
 @property int firstNoteActive;
 + (UIImage *)imageFromColor:(UIColor *)color;
@@ -162,7 +162,7 @@
     
     //music!!!
     NSURL *aupURL = [[NSBundle mainBundle] URLForResource:@"Trombone" withExtension:@"aupreset"];
-    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
+    self.sampler = [[GridSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
     
     
     // TODO: get soundfonts working

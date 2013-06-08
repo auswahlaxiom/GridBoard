@@ -27,22 +27,21 @@
 		1C79BA95176389D1004AF8A0 /* KeyConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BA94176389D1004AF8A0 /* KeyConfigViewController.m */; };
 		1C79BA9817638A19004AF8A0 /* KeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BA9717638A19004AF8A0 /* KeyViewController.m */; };
 		1C79BA9C17638A74004AF8A0 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BA9B17638A74004AF8A0 /* Sounds */; };
-		1C79BA9F17638A8B004AF8A0 /* Vibraphone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BA9D17638A8B004AF8A0 /* Vibraphone.aupreset */; };
-		1C79BAA017638A8B004AF8A0 /* Trombone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BA9E17638A8B004AF8A0 /* Trombone.aupreset */; };
-		1C79BAA717638AAC004AF8A0 /* Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA217638AAB004AF8A0 /* Piano.sf2 */; };
-		1C79BAA817638AAC004AF8A0 /* Gorts_Filters.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA317638AAB004AF8A0 /* Gorts_Filters.sf2 */; };
-		1C79BAA917638AAC004AF8A0 /* GuitarAcoustic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA417638AAB004AF8A0 /* GuitarAcoustic.sf2 */; };
-		1C79BAAA17638AAC004AF8A0 /* Dethmetal.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA517638AAB004AF8A0 /* Dethmetal.sf2 */; };
-		1C79BAAB17638AAC004AF8A0 /* BassTremolo.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAA617638AAC004AF8A0 /* BassTremolo.sf2 */; };
 		1C79BABA1763999D004AF8A0 /* ZFNumberBag.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAB91763999D004AF8A0 /* ZFNumberBag.m */; };
-		1C79BAC01763BCC8004AF8A0 /* EPSSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */; };
-		1C79BAC21763BCC8004AF8A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BABF1763BCC8004AF8A0 /* README.md */; };
 		1C79BAC51763BCF2004AF8A0 /* GridBrain.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAC41763BCF2004AF8A0 /* GridBrain.m */; };
 		1C79BAC81763BD13004AF8A0 /* GridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAC61763BD13004AF8A0 /* GridViewController.m */; };
 		1C79BACD1763BD27004AF8A0 /* GridBoard icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAC91763BD27004AF8A0 /* GridBoard icon.png */; };
 		1C79BACE1763BD27004AF8A0 /* GridBoard icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACA1763BD27004AF8A0 /* GridBoard icon@2x.png */; };
 		1C79BACF1763BD27004AF8A0 /* tymoczko_fig3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACB1763BD27004AF8A0 /* tymoczko_fig3.png */; };
 		1C79BAD01763BD27004AF8A0 /* tymoczko_fig3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BACC1763BD27004AF8A0 /* tymoczko_fig3@2x.png */; };
+		1C79BAD31763E706004AF8A0 /* GridSampler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAD11763E706004AF8A0 /* GridSampler.m */; };
+		1C79BAD61763E75E004AF8A0 /* Trombone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAD41763E75E004AF8A0 /* Trombone.aupreset */; };
+		1C79BAD71763E75E004AF8A0 /* Vibraphone.aupreset in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAD51763E75E004AF8A0 /* Vibraphone.aupreset */; };
+		1C79BADD1763E76A004AF8A0 /* Piano.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAD81763E76A004AF8A0 /* Piano.sf2 */; };
+		1C79BADE1763E76A004AF8A0 /* BassTremolo.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BAD91763E76A004AF8A0 /* BassTremolo.sf2 */; };
+		1C79BADF1763E76A004AF8A0 /* GuitarAcoustic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADA1763E76A004AF8A0 /* GuitarAcoustic.sf2 */; };
+		1C79BAE01763E76A004AF8A0 /* Dethmetal.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADB1763E76A004AF8A0 /* Dethmetal.sf2 */; };
+		1C79BAE11763E76A004AF8A0 /* Gorts_Filters.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,18 +77,8 @@
 		1C79BA9617638A19004AF8A0 /* KeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyViewController.h; sourceTree = "<group>"; };
 		1C79BA9717638A19004AF8A0 /* KeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyViewController.m; sourceTree = "<group>"; };
 		1C79BA9B17638A74004AF8A0 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
-		1C79BA9D17638A8B004AF8A0 /* Vibraphone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Vibraphone.aupreset; sourceTree = "<group>"; };
-		1C79BA9E17638A8B004AF8A0 /* Trombone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Trombone.aupreset; sourceTree = "<group>"; };
-		1C79BAA217638AAB004AF8A0 /* Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Piano.sf2; sourceTree = "<group>"; };
-		1C79BAA317638AAB004AF8A0 /* Gorts_Filters.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gorts_Filters.sf2; sourceTree = "<group>"; };
-		1C79BAA417638AAB004AF8A0 /* GuitarAcoustic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = GuitarAcoustic.sf2; sourceTree = "<group>"; };
-		1C79BAA517638AAB004AF8A0 /* Dethmetal.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dethmetal.sf2; sourceTree = "<group>"; };
-		1C79BAA617638AAC004AF8A0 /* BassTremolo.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = BassTremolo.sf2; sourceTree = "<group>"; };
 		1C79BAB81763999D004AF8A0 /* ZFNumberBag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFNumberBag.h; sourceTree = "<group>"; };
 		1C79BAB91763999D004AF8A0 /* ZFNumberBag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFNumberBag.m; sourceTree = "<group>"; };
-		1C79BABC1763BCC8004AF8A0 /* EPSSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPSSampler.h; sourceTree = "<group>"; };
-		1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EPSSampler.m; sourceTree = "<group>"; };
-		1C79BABF1763BCC8004AF8A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		1C79BAC31763BCF2004AF8A0 /* GridBrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridBrain.h; sourceTree = "<group>"; };
 		1C79BAC41763BCF2004AF8A0 /* GridBrain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridBrain.m; sourceTree = "<group>"; };
 		1C79BAC61763BD13004AF8A0 /* GridViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridViewController.m; sourceTree = "<group>"; };
@@ -98,6 +87,15 @@
 		1C79BACA1763BD27004AF8A0 /* GridBoard icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "GridBoard icon@2x.png"; path = "GridBoard/Images/GridBoard icon@2x.png"; sourceTree = "<group>"; };
 		1C79BACB1763BD27004AF8A0 /* tymoczko_fig3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tymoczko_fig3.png; path = GridBoard/Images/tymoczko_fig3.png; sourceTree = "<group>"; };
 		1C79BACC1763BD27004AF8A0 /* tymoczko_fig3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tymoczko_fig3@2x.png"; path = "GridBoard/Images/tymoczko_fig3@2x.png"; sourceTree = "<group>"; };
+		1C79BAD11763E706004AF8A0 /* GridSampler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridSampler.m; sourceTree = "<group>"; };
+		1C79BAD21763E706004AF8A0 /* GridSampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridSampler.h; sourceTree = "<group>"; };
+		1C79BAD41763E75E004AF8A0 /* Trombone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Trombone.aupreset; path = AUPresets/Trombone.aupreset; sourceTree = "<group>"; };
+		1C79BAD51763E75E004AF8A0 /* Vibraphone.aupreset */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Vibraphone.aupreset; path = AUPresets/Vibraphone.aupreset; sourceTree = "<group>"; };
+		1C79BAD81763E76A004AF8A0 /* Piano.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Piano.sf2; path = SoundFonts/Piano.sf2; sourceTree = "<group>"; };
+		1C79BAD91763E76A004AF8A0 /* BassTremolo.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = BassTremolo.sf2; path = SoundFonts/BassTremolo.sf2; sourceTree = "<group>"; };
+		1C79BADA1763E76A004AF8A0 /* GuitarAcoustic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = GuitarAcoustic.sf2; path = SoundFonts/GuitarAcoustic.sf2; sourceTree = "<group>"; };
+		1C79BADB1763E76A004AF8A0 /* Dethmetal.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Dethmetal.sf2; path = SoundFonts/Dethmetal.sf2; sourceTree = "<group>"; };
+		1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Gorts_Filters.sf2; path = SoundFonts/Gorts_Filters.sf2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +148,6 @@
 		1C1FAC111709F0AC00BCF2E9 /* GridBoard */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BABB1763BCC7004AF8A0 /* EPSSampler */,
 				1C1FAC3C1709F7A500BCF2E9 /* Model */,
 				1C1FAC3B1709F79500BCF2E9 /* View Controllers */,
 				1C1FAC44170A91C900BCF2E9 /* Views */,
@@ -195,6 +192,8 @@
 		1C1FAC3C1709F7A500BCF2E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1C79BAD11763E706004AF8A0 /* GridSampler.m */,
+				1C79BAD21763E706004AF8A0 /* GridSampler.h */,
 				1C79BAC31763BCF2004AF8A0 /* GridBrain.h */,
 				1C79BAC41763BCF2004AF8A0 /* GridBrain.m */,
 				1C79BAB81763999D004AF8A0 /* ZFNumberBag.h */,
@@ -251,8 +250,8 @@
 		1C79BAA117638A90004AF8A0 /* AUPresets */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BA9D17638A8B004AF8A0 /* Vibraphone.aupreset */,
-				1C79BA9E17638A8B004AF8A0 /* Trombone.aupreset */,
+				1C79BAD41763E75E004AF8A0 /* Trombone.aupreset */,
+				1C79BAD51763E75E004AF8A0 /* Vibraphone.aupreset */,
 			);
 			name = AUPresets;
 			sourceTree = "<group>";
@@ -260,23 +259,13 @@
 		1C79BAAC17638AB6004AF8A0 /* Soundfonts */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BAA217638AAB004AF8A0 /* Piano.sf2 */,
-				1C79BAA317638AAB004AF8A0 /* Gorts_Filters.sf2 */,
-				1C79BAA417638AAB004AF8A0 /* GuitarAcoustic.sf2 */,
-				1C79BAA517638AAB004AF8A0 /* Dethmetal.sf2 */,
-				1C79BAA617638AAC004AF8A0 /* BassTremolo.sf2 */,
+				1C79BAD81763E76A004AF8A0 /* Piano.sf2 */,
+				1C79BAD91763E76A004AF8A0 /* BassTremolo.sf2 */,
+				1C79BADA1763E76A004AF8A0 /* GuitarAcoustic.sf2 */,
+				1C79BADB1763E76A004AF8A0 /* Dethmetal.sf2 */,
+				1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */,
 			);
 			name = Soundfonts;
-			sourceTree = "<group>";
-		};
-		1C79BABB1763BCC7004AF8A0 /* EPSSampler */ = {
-			isa = PBXGroup;
-			children = (
-				1C79BABC1763BCC8004AF8A0 /* EPSSampler.h */,
-				1C79BABD1763BCC8004AF8A0 /* EPSSampler.m */,
-				1C79BABF1763BCC8004AF8A0 /* README.md */,
-			);
-			path = EPSSampler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,18 +326,17 @@
 				1C1FAC251709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard in Resources */,
 				1C1FAC281709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard in Resources */,
 				1C79BA9C17638A74004AF8A0 /* Sounds in Resources */,
-				1C79BA9F17638A8B004AF8A0 /* Vibraphone.aupreset in Resources */,
-				1C79BAA017638A8B004AF8A0 /* Trombone.aupreset in Resources */,
-				1C79BAA717638AAC004AF8A0 /* Piano.sf2 in Resources */,
-				1C79BAA817638AAC004AF8A0 /* Gorts_Filters.sf2 in Resources */,
-				1C79BAA917638AAC004AF8A0 /* GuitarAcoustic.sf2 in Resources */,
-				1C79BAAA17638AAC004AF8A0 /* Dethmetal.sf2 in Resources */,
-				1C79BAAB17638AAC004AF8A0 /* BassTremolo.sf2 in Resources */,
-				1C79BAC21763BCC8004AF8A0 /* README.md in Resources */,
 				1C79BACD1763BD27004AF8A0 /* GridBoard icon.png in Resources */,
 				1C79BACE1763BD27004AF8A0 /* GridBoard icon@2x.png in Resources */,
 				1C79BACF1763BD27004AF8A0 /* tymoczko_fig3.png in Resources */,
 				1C79BAD01763BD27004AF8A0 /* tymoczko_fig3@2x.png in Resources */,
+				1C79BAD61763E75E004AF8A0 /* Trombone.aupreset in Resources */,
+				1C79BAD71763E75E004AF8A0 /* Vibraphone.aupreset in Resources */,
+				1C79BADD1763E76A004AF8A0 /* Piano.sf2 in Resources */,
+				1C79BADE1763E76A004AF8A0 /* BassTremolo.sf2 in Resources */,
+				1C79BADF1763E76A004AF8A0 /* GuitarAcoustic.sf2 in Resources */,
+				1C79BAE01763E76A004AF8A0 /* Dethmetal.sf2 in Resources */,
+				1C79BAE11763E76A004AF8A0 /* Gorts_Filters.sf2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,9 +356,9 @@
 				1C79BA95176389D1004AF8A0 /* KeyConfigViewController.m in Sources */,
 				1C79BA9817638A19004AF8A0 /* KeyViewController.m in Sources */,
 				1C79BABA1763999D004AF8A0 /* ZFNumberBag.m in Sources */,
-				1C79BAC01763BCC8004AF8A0 /* EPSSampler.m in Sources */,
 				1C79BAC51763BCF2004AF8A0 /* GridBrain.m in Sources */,
 				1C79BAC81763BD13004AF8A0 /* GridViewController.m in Sources */,
+				1C79BAD31763E706004AF8A0 /* GridSampler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

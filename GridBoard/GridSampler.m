@@ -1,11 +1,11 @@
 //
-//  EPSSampler.m
+//  GridSampler.m
 //
-//  Created by Peter Stuart on 02/10/13.
-//  Copyright (c) 2013 Electric Peel Software. All rights reserved.
+// Extracted from: https://developer.apple.com/library/ios/samplecode/LoadPresetDemo/Introduction/Intro.html#//apple_ref/doc/uid/DTS40011214
+// tech-note: https://developer.apple.com/library/ios/samplecode/LoadPresetDemo/Introduction/Intro.html#//apple_ref/doc/uid/DTS40011214
 //
 
-#import "EPSSampler.h"
+#import "GridSampler.h"
 
 #import <AssertMacros.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -21,7 +21,7 @@ enum
 #define kMidiVelocityMinimum 0
 #define kMidiVelocityMaximum 127
 
-@interface EPSSampler ()
+@interface GridSampler ()
 
 @property (readwrite) Float64 graphSampleRate;
 @property (nonatomic, readwrite) AUGraph processingGraph;
@@ -36,7 +36,7 @@ enum
 
 @end
 
-@implementation EPSSampler
+@implementation GridSampler
 
 
 #pragma mark - Public Methods
@@ -148,48 +148,62 @@ logTheError:
 #pragma mark -
 #pragma mark Private Methods
 
-- (BOOL)createAUGraph
+// Create an audio processing graph.
+- (BOOL) createAUGraph
 {
+    
 	OSStatus result = noErr;
-	AUNode   samplerNode, ioNode;
-
+	AUNode samplerNode, ioNode;
+    
+    // Specify the common portion of an audio unit's identify, used for both audio units
+    // in the graph.
 	AudioComponentDescription cd = {};
-
-	cd.componentManufacturer = kAudioUnitManufacturer_Apple;
-	cd.componentFlags        = 0;
-	cd.componentFlagsMask    = 0;
-
-	result = NewAUGraph(&_processingGraph);
-	NSCAssert(result == noErr, @"Unable to create an AUGraph object. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	cd.componentType    = kAudioUnitType_MusicDevice;
+	cd.componentManufacturer     = kAudioUnitManufacturer_Apple;
+	cd.componentFlags            = 0;
+	cd.componentFlagsMask        = 0;
+    
+    // Instantiate an audio processing graph
+	result = NewAUGraph (&_processingGraph);
+    NSCAssert (result == noErr, @"Unable to create an AUGraph object. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+	//Specify the Sampler unit, to be used as the first node of the graph
+	cd.componentType = kAudioUnitType_MusicDevice;
 	cd.componentSubType = kAudioUnitSubType_Sampler;
-
-	result = AUGraphAddNode(self.processingGraph, &cd, &samplerNode);
-	NSCAssert(result == noErr, @"Unable to add the Sampler unit to the audio processing graph. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	cd.componentType    = kAudioUnitType_Output;
+	
+    // Add the Sampler unit node to the graph
+	result = AUGraphAddNode (self.processingGraph, &cd, &samplerNode);
+    NSCAssert (result == noErr, @"Unable to add the Sampler unit to the audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+	// Specify the Output unit, to be used as the second and final node of the graph
+	cd.componentType = kAudioUnitType_Output;
 	cd.componentSubType = kAudioUnitSubType_RemoteIO;
-
-	result = AUGraphAddNode(self.processingGraph, &cd, &ioNode);
-	NSCAssert(result == noErr, @"Unable to add the Output unit to the audio processing graph. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	result = AUGraphOpen(self.processingGraph);
-	NSCAssert(result == noErr, @"Unable to open the audio processing graph. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	result = AUGraphConnectNodeInput(self.processingGraph, samplerNode, 0, ioNode, 0);
-	NSCAssert(result == noErr, @"Unable to interconnect the nodes in the audio processing graph. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	result = AUGraphNodeInfo(self.processingGraph, samplerNode, 0, &_samplerUnit);
-	NSCAssert(result == noErr, @"Unable to obtain a reference to the Sampler unit. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	result = AUGraphNodeInfo(self.processingGraph, ioNode, 0, &_ioUnit);
-	NSCAssert(result == noErr, @"Unable to obtain a reference to the I/O unit. Error code: %d '%.4s'", (int)result, (const char *)&result);
-
-	return YES;
+    
+    // Add the Output unit node to the graph
+	result = AUGraphAddNode (self.processingGraph, &cd, &ioNode);
+    NSCAssert (result == noErr, @"Unable to add the Output unit to the audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+    // Open the graph
+	result = AUGraphOpen (self.processingGraph);
+    NSCAssert (result == noErr, @"Unable to open the audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+    // Connect the Sampler unit to the output unit
+	result = AUGraphConnectNodeInput (self.processingGraph, samplerNode, 0, ioNode, 0);
+    NSCAssert (result == noErr, @"Unable to interconnect the nodes in the audio processing graph. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+	// Obtain a reference to the Sampler unit from its node
+	result = AUGraphNodeInfo (self.processingGraph, samplerNode, 0, &_samplerUnit);
+    NSCAssert (result == noErr, @"Unable to obtain a reference to the Sampler unit. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+	// Obtain a reference to the I/O unit from its node
+	result = AUGraphNodeInfo (self.processingGraph, ioNode, 0, &_ioUnit);
+    NSCAssert (result == noErr, @"Unable to obtain a reference to the I/O unit. Error code: %d '%.4s'", (int) result, (const char *)&result);
+    
+    return YES;
 }
 
 
+// Starting with instantiated audio processing graph, configure its
+// audio units, initialize it, and start it.
 - (void) configureAndStartAudioProcessingGraph: (AUGraph) graph
 {
     
