@@ -15,7 +15,8 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>tymoczko_fig3a.png</string>
-				<string>tymoczko_fig3.png</string>
+				<string>GridBoard icon.png</string>
+				<string>GridBoard icon@2x.png</string>
 			</array>
 		</dict>
 	</dict>
