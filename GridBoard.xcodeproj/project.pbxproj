@@ -151,9 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				1C79BABB1763BCC7004AF8A0 /* EPSSampler */,
-				1C79BAAC17638AB6004AF8A0 /* Soundfonts */,
-				1C79BAA117638A90004AF8A0 /* AUPresets */,
-				1C79BA9B17638A74004AF8A0 /* Sounds */,
 				1C1FAC3C1709F7A500BCF2E9 /* Model */,
 				1C1FAC3B1709F79500BCF2E9 /* View Controllers */,
 				1C1FAC44170A91C900BCF2E9 /* Views */,
@@ -162,6 +159,9 @@
 				1C1FAC231709F0AC00BCF2E9 /* MainStoryboard_iPhone.storyboard */,
 				1C1FAC261709F0AC00BCF2E9 /* MainStoryboard_iPad.storyboard */,
 				1C3EB751170BF393000A6AED /* Resources */,
+				1C79BAAC17638AB6004AF8A0 /* Soundfonts */,
+				1C79BA9B17638A74004AF8A0 /* Sounds */,
+				1C79BAA117638A90004AF8A0 /* AUPresets */,
 				1C1FAC121709F0AC00BCF2E9 /* Supporting Files */,
 			);
 			path = GridBoard;
@@ -229,10 +229,10 @@
 		1C79BA9917638A1E004AF8A0 /* Keys */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BA93176389D1004AF8A0 /* KeyConfigViewController.h */,
-				1C79BA94176389D1004AF8A0 /* KeyConfigViewController.m */,
 				1C79BA9617638A19004AF8A0 /* KeyViewController.h */,
 				1C79BA9717638A19004AF8A0 /* KeyViewController.m */,
+				1C79BA93176389D1004AF8A0 /* KeyConfigViewController.h */,
+				1C79BA94176389D1004AF8A0 /* KeyConfigViewController.m */,
 			);
 			name = Keys;
 			sourceTree = "<group>";
@@ -240,8 +240,8 @@
 		1C79BA9A17638A28004AF8A0 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BAC61763BD13004AF8A0 /* GridViewController.m */,
 				1C79BAC71763BD13004AF8A0 /* GridViewController.h */,
+				1C79BAC61763BD13004AF8A0 /* GridViewController.m */,
 				1C173AFF1717916600625BF2 /* GridConfigViewController.h */,
 				1C173B001717916600625BF2 /* GridConfigViewController.m */,
 			);

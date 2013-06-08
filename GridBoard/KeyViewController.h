@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 #import "KeyConfigViewController.h"
-@interface KeyViewController : UIViewController <KeyConfigDelegate>
+
+
+@interface KeyViewController : UIViewController <KeyConfigDelegate, AVAudioSessionDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *keyScrollView;
 - (NSArray *)activeNotes;

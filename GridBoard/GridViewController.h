@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 
 #import "GridBrain.h"
 #import "GridView.h"
 
-@interface GridViewController : UIViewController <GridViewDataSource>
+@interface GridViewController : UIViewController <GridViewDataSource, AVAudioSessionDelegate>
 
 @property (strong, nonatomic)GridBrain *brain;
 @property (weak, nonatomic) IBOutlet GridView *gridView;

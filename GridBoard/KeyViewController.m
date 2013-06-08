@@ -162,7 +162,7 @@
     
     //music!!!
     NSURL *aupURL = [[NSBundle mainBundle] URLForResource:@"Trombone" withExtension:@"aupreset"];
-    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL];
+    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
     
     
     // TODO: get soundfonts working
@@ -439,5 +439,51 @@
 {
     [self resizeKeys];
 }
+#pragma mark -
+#pragma mark Audio session delegate
+
+// Respond to an audio interruption, such as a phone call or a Clock alarm.
+- (void) beginInterruption
+{
+    
+    // Stop any notes that are currently playing.
+    for(NSNumber *num in self.activeNotes) {
+        [self.sampler stopPlayingNote:[num integerValue]];
+    }
+    
+    // Interruptions do not put an AUGraph object into a "stopped" state, so
+    //    do that here.
+    [self.sampler stopAudioProcessingGraph];
+}
+
+
+// Respond to the ending of an audio interruption.
+- (void) endInterruptionWithFlags: (NSUInteger) flags
+{
+    
+    NSError *endInterruptionError = nil;
+    [[AVAudioSession sharedInstance] setActive: YES
+                                         error: &endInterruptionError];
+    if (endInterruptionError != nil) {
+        
+        NSLog (@"Unable to reactivate the audio session.");
+        return;
+    }
+    
+    if (flags & AVAudioSessionInterruptionFlags_ShouldResume) {
+        
+        
+        //         In a shipping application, check here to see if the hardware sample rate changed from
+        //         its previous value by comparing it to graphSampleRate. If it did change, reconfigure
+        //         the ioInputStreamFormat struct to use the new sample rate, and set the new stream
+        //         format on the two audio units. (On the mixer, you just need to change the sample rate).
+        //
+        //         Then call AUGraphUpdate on the graph before starting it.
+        
+        
+        [self.sampler restartAudioProcessingGraph];
+    }
+}
+
 
 @end

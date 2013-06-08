@@ -162,7 +162,7 @@
 
 
 #pragma mark -
-#pragma mark Audio session control
+#pragma mark Audio session delegate
 
 // Respond to an audio interruption, such as a phone call or a Clock alarm.
 - (void) beginInterruption
@@ -214,7 +214,7 @@
 //
 // Responding to these UIApplication notifications allows this class to stop and restart the
 //    graph as appropriate.
-- (void) registerForUIApplicationNotifications
+- (void)registerForUIApplicationNotifications
 {
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -231,7 +231,17 @@
 }
 
 
-- (void) handleResigningActive: (id) notification
+- (void)unregisterForNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                              forKeyPath:UIApplicationDidBecomeActiveNotification];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                              forKeyPath:UIApplicationWillResignActiveNotification];
+    
+}
+
+
+- (void)handleResigningActive: (id) notification
 {
     
     [self notesOff:self.activeNotes];
@@ -240,7 +250,7 @@
 }
 
 
-- (void) handleBecomingActive: (id) notification
+- (void)handleBecomingActive: (id) notification
 {
     
     [self.sampler restartAudioProcessingGraph];
@@ -252,7 +262,7 @@
     [super viewDidLoad];
     
     NSURL *aupURL = [[NSBundle mainBundle] URLForResource:@"Trombone" withExtension:@"aupreset"];
-    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL];
+    self.sampler = [[EPSSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
     
 	self.brain = [[GridBrain alloc] init];
     self.gridView.rows = [self.brain.numRows intValue];
@@ -262,6 +272,11 @@
     
     [self registerForUIApplicationNotifications];
 
+}
+
+- (void)dealloc
+{
+    [self unregisterForNotifications];
 }
 
 @end

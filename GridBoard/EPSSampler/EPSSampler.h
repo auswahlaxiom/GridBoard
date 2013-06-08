@@ -11,7 +11,7 @@
 #import <CoreAudio/CoreAudioTypes.h>
 @interface EPSSampler : NSObject
 
-- (id)initWithPresetURL:(NSURL *)url;
+- (id)initWithPresetURL:(NSURL *)url audioSessionDelegate: (id<AVAudioSessionDelegate>)delegate;
 
 -(OSStatus) loadFromDLSOrSoundFont: (NSURL *)bankURL withPatch: (int)presetNumber;
 

@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
 #import "GridBrain.h"
 #import "GridView.h"
+
+
 @interface GridConfigViewController : UIViewController <UITextFieldDelegate>
 
 //THIS IS VERY BAD!!!! but i need to get it done quick for demo on 4/12/2013
