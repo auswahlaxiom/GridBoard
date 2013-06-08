@@ -10,30 +10,39 @@
 
 @implementation GridView
 
-@synthesize activeNotes = _activeNotes, rows = _rows, columns = _columns;
 
--(void)setActiveNotes:(NSArray *)activeNotes {
+-(void)setActiveNotes:(NSArray *)activeNotes
+{
     if(_activeNotes != activeNotes) {
         _activeNotes = activeNotes;
         [self setNeedsDisplay];
     }
 }
--(void)setColumns:(int)columns {
+
+
+-(void)setColumns:(int)columns
+{
     if(_columns != columns) {
         _columns = columns;
         [self setNeedsDisplay];
     }
 }
--(void)setRows:(int)rows {
+
+
+-(void)setRows:(int)rows
+{
     if(_rows != rows) {
         _rows = rows;
         [self setNeedsDisplay];
     }
 }
+
+
 - (void)awakeFromNib
 {
     [self setup]; // get initialized when we come out of a storyboard
 }
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -44,7 +53,9 @@
     return self;
 }
 
--(void)setup {
+
+-(void)setup
+{
     self.contentMode = UIViewContentModeRedraw;
     self.activeNotes = [[NSArray alloc] init];
     //other stuff?

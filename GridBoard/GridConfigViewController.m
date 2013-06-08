@@ -16,7 +16,7 @@
 @end
 
 @implementation GridConfigViewController
-@synthesize scaleTextField, keyLabel, rowsLabel, rowIntervalLabel, baseOctaveLabel, chordTextField, rowInKeySwitch, chordInKeySwitch, majorScale, minorScale, scaleSegment, chordSegment, rowsSlider, rowIntervalSlider, keySlider, baseOctaveSlider;
+
 
 - (void)viewDidLoad
 {
@@ -40,6 +40,8 @@
     [self refreshUI];
     
 }
+
+
 -(void)refreshUI {
     self.keyLabel.text = [GridBrain nameForMidiNote:[[self.brain key] intValue] showOctave:NO];
     self.keySlider.value = self.brain.key.intValue;
@@ -83,20 +85,28 @@
     }
     self.chordTextField.text = [self stringForNotes:self.brain.chord];
 }
--(void)refreshGridView {
+
+
+-(void)refreshGridView
+{
     self.gridView.rows = [self.brain.numRows intValue];
     self.gridView.columns = (self.brain.scale.count + 1);
     [self.gridView setNeedsDisplay];
 }
 
-- (NSString *)stringForNotes:(NSArray *)notes {
+
+- (NSString *)stringForNotes:(NSArray *)notes
+{
     NSString *customNotes = @"";
     for(NSNumber *num in notes) {
         customNotes = [customNotes stringByAppendingString:[NSString stringWithFormat:@"%i ", [num intValue]]];
     }
     return customNotes;
 }
-- (NSArray *)notesForString:(NSString *)string {
+
+
+- (NSArray *)notesForString:(NSString *)string
+{
     NSMutableArray *notes = [[NSMutableArray alloc] init];
     for(NSString *num in [string componentsSeparatedByString:@" "]) {
         [notes addObject:[NSNumber numberWithInt:[num intValue]]];
@@ -104,7 +114,9 @@
     return notes;
 }
 
-- (IBAction)scaleSelector:(UISegmentedControl *)sender {
+
+- (IBAction)scaleSelector:(UISegmentedControl *)sender
+{
     if(sender.selectedSegmentIndex == 0) {
         self.brain.scale = self.majorScale;
     } else if(sender.selectedSegmentIndex == 1) {
@@ -115,35 +127,53 @@
     [self refreshUI];
     [self refreshGridView];
 }
-- (IBAction)keyChanged:(UISlider *)sender {
+
+
+- (IBAction)keyChanged:(UISlider *)sender
+{
     int key = sender.value;
     self.brain.key = [NSNumber numberWithInt:key];
     self.keyLabel.text = [GridBrain nameForMidiNote:key showOctave:NO];
     [self refreshGridView];
 }
-- (IBAction)rowsChanged:(UISlider *)sender {
+
+
+- (IBAction)rowsChanged:(UISlider *)sender
+{
     int rows = sender.value;
     self.brain.numRows = [NSNumber numberWithInt:rows];
     self.rowsLabel.text = [NSString stringWithFormat:@"%i", rows];
     [self refreshGridView];
 }
-- (IBAction)rowIntervalChanged:(UISlider *)sender {
+
+
+- (IBAction)rowIntervalChanged:(UISlider *)sender
+{
     int rowInterval = sender.value;
     self.brain.rowInterval = [NSNumber numberWithInt:rowInterval];
     self.rowIntervalLabel.text = [NSString stringWithFormat:@"%i", rowInterval];
     [self refreshGridView];
 }
-- (IBAction)rowInKeyChanged:(UISwitch *)sender {
+
+
+- (IBAction)rowInKeyChanged:(UISwitch *)sender
+{
     self.brain.rowInKey = [NSNumber numberWithBool:sender.on];
     [self refreshGridView];
 }
-- (IBAction)baseOctaveChanged:(UISlider *)sender {
+
+
+- (IBAction)baseOctaveChanged:(UISlider *)sender
+{
     int startOctave = sender.value;
     self.brain.startOctave = [NSNumber numberWithInt:startOctave];
     self.baseOctaveLabel.text = [NSString stringWithFormat:@"%i", startOctave];
     [self refreshGridView];
 }
-- (IBAction)chordChanged:(UISegmentedControl *)sender {
+
+
+- (IBAction)chordChanged:(UISegmentedControl *)sender
+{
     if(sender.selectedSegmentIndex == 0) {
         self.brain.chord = [NSArray arrayWithObject:[NSNumber numberWithInt:0]];
     } else if([self.brain.chordInKey boolValue]) {
@@ -162,7 +192,10 @@
     [self refreshUI];
     [self refreshGridView];
 }
-- (IBAction)chordInKeyChanged:(UISwitch *)sender {
+
+
+- (IBAction)chordInKeyChanged:(UISwitch *)sender
+{
     self.brain.chordInKey = [NSNumber numberWithBool:sender.on];
     if([self.brain.chordInKey boolValue]) {
         if([self.brain.chord isEqualToArray:self.majorChordAbsolute]) {
@@ -177,8 +210,11 @@
     [self refreshGridView];
 }
 
-#pragma mark UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [textField resignFirstResponder];
     if(textField == self.chordTextField) {
         self.brain.chord = [self notesForString:textField.text];
@@ -189,7 +225,10 @@
     [self refreshGridView];
     return NO;
 }
-- (void)viewDidUnload {
+
+
+- (void)viewDidUnload
+{
     [self setScaleTextField:nil];
     [self setKeyLabel:nil];
     [self setRowsLabel:nil];

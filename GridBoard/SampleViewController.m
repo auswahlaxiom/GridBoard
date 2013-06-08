@@ -31,23 +31,14 @@ enum {
 
 @implementation SampleViewController
 
-@synthesize graphSampleRate     = _graphSampleRate;
-@synthesize currentPresetLabel  = _currentPresetLabel;
-@synthesize presetOneButton     = _presetOneButton;
-@synthesize presetTwoButton     = _presetTwoButton;
-@synthesize lowNoteButton       = _lowNoteButton;
-@synthesize midNoteButton       = _midNoteButton;
-@synthesize highNoteButton      = _highNoteButton;
-@synthesize samplerUnit         = _samplerUnit;
-@synthesize ioUnit              = _ioUnit;
-@synthesize processingGraph     = _processingGraph;
 
 #pragma mark -
 #pragma mark Audio setup
 
 
 // Create an audio processing graph.
-- (BOOL) createAUGraph {
+- (BOOL) createAUGraph
+{
     
 	OSStatus result = noErr;
 	AUNode samplerNode, ioNode;
@@ -101,7 +92,8 @@ enum {
 
 // Starting with instantiated audio processing graph, configure its
 // audio units, initialize it, and start it.
-- (void) configureAndStartAudioProcessingGraph: (AUGraph) graph {
+- (void) configureAndStartAudioProcessingGraph: (AUGraph) graph
+{
     
     OSStatus result = noErr;
     UInt32 framesPerSlice = 0;
@@ -177,9 +169,10 @@ enum {
 
 
 // Load the Trombone preset
-- (IBAction)loadPresetOne:(id)sender {
+- (IBAction)loadPresetOne:(id)sender
+{
     
-	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Piano" ofType:@"aupreset"]];
+	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Trombone" ofType:@"aupreset"]];
 	if (presetURL) {
 		NSLog(@"Attempting to load preset '%@'\n", [presetURL description]);
         self.currentPresetLabel.text = @"Piano";
@@ -192,7 +185,8 @@ enum {
 }
 
 // Load the Vibraphone preset
-- (IBAction)loadPresetTwo:(id)sender {
+- (IBAction)loadPresetTwo:(id)sender
+{
     
 	NSURL *presetURL = [[NSURL alloc] initFileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Vibraphone" ofType:@"aupreset"]];
 	if (presetURL) {
@@ -206,7 +200,8 @@ enum {
 }
 
 // Load a synthesizer preset file and apply it to the Sampler unit
-- (OSStatus) loadSynthFromPresetURL: (NSURL *) presetURL {
+- (OSStatus) loadSynthFromPresetURL: (NSURL *) presetURL
+{
     
 	CFDataRef propertyResourceData = 0;
 	Boolean status;
@@ -260,7 +255,8 @@ enum {
 
 
 // Set up the audio session for this app.
-- (BOOL) setupAudioSession {
+- (BOOL) setupAudioSession
+{
     
     AVAudioSession *mySession = [AVAudioSession sharedInstance];
     
@@ -294,7 +290,8 @@ enum {
 #pragma mark -
 #pragma mark Audio control
 // Play the low note
-- (IBAction) startPlayLowNote:(id)sender {
+- (IBAction) startPlayLowNote:(id)sender
+{
     
 	UInt32 noteNum = kLowNote;
 	UInt32 onVelocity = 127;
@@ -308,7 +305,8 @@ logTheError:
 }
 
 // Stop the low note
-- (IBAction) stopPlayLowNote:(id)sender {
+- (IBAction) stopPlayLowNote:(id)sender
+{
     
 	UInt32 noteNum = kLowNote;
 	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
@@ -321,7 +319,8 @@ logTheError:
 }
 
 // Play the mid note
-- (IBAction) startPlayMidNote:(id)sender {
+- (IBAction) startPlayMidNote:(id)sender
+{
     
 	UInt32 noteNum = kMidNote;
 	UInt32 onVelocity = 127;
@@ -335,7 +334,8 @@ logTheError:
 }
 
 // Stop the mid note
-- (IBAction) stopPlayMidNote:(id)sender {
+- (IBAction) stopPlayMidNote:(id)sender
+{
     
 	UInt32 noteNum = kMidNote;
 	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
@@ -348,7 +348,8 @@ logTheError:
 }
 
 // Play the high note
-- (IBAction) startPlayHighNote:(id)sender {
+- (IBAction) startPlayHighNote:(id)sender
+{
     
 	UInt32 noteNum = kHighNote;
 	UInt32 onVelocity = 127;
@@ -362,7 +363,8 @@ logTheError:
 }
 
 // Stop the high note
-- (IBAction)stopPlayHighNote:(id)sender {
+- (IBAction)stopPlayHighNote:(id)sender
+{
     
 	UInt32 noteNum = kHighNote;
 	UInt32 noteCommand = 	kMIDIMessage_NoteOff << 4 | 0;
@@ -375,7 +377,8 @@ logTheError:
 }
 
 // Stop the audio processing graph
-- (void) stopAudioProcessingGraph {
+- (void) stopAudioProcessingGraph
+{
     
     OSStatus result = noErr;
 	if (self.processingGraph) result = AUGraphStop(self.processingGraph);
@@ -383,7 +386,8 @@ logTheError:
 }
 
 // Restart the audio processing graph
-- (void) restartAudioProcessingGraph {
+- (void) restartAudioProcessingGraph
+{
     
     OSStatus result = noErr;
 	if (self.processingGraph) result = AUGraphStart (self.processingGraph);
@@ -395,7 +399,8 @@ logTheError:
 #pragma mark Audio session delegate methods
 
 // Respond to an audio interruption, such as a phone call or a Clock alarm.
-- (void) beginInterruption {
+- (void) beginInterruption
+{
     
     // Stop any notes that are currently playing.
     [self stopPlayLowNote: self];
@@ -409,7 +414,8 @@ logTheError:
 
 
 // Respond to the ending of an audio interruption.
-- (void) endInterruptionWithFlags: (NSUInteger) flags {
+- (void) endInterruptionWithFlags: (NSUInteger) flags
+{
     
     NSError *endInterruptionError = nil;
     [[AVAudioSession sharedInstance] setActive: YES
@@ -444,7 +450,8 @@ logTheError:
 //
 // Responding to these UIApplication notifications allows this class to stop and restart the
 //    graph as appropriate.
-- (void) registerForUIApplicationNotifications {
+- (void) registerForUIApplicationNotifications
+{
     
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
@@ -460,7 +467,8 @@ logTheError:
 }
 
 
-- (void) handleResigningActive: (id) notification {
+- (void) handleResigningActive: (id) notification
+{
     
     [self stopPlayLowNote: self];
     [self stopPlayMidNote: self];
@@ -469,12 +477,14 @@ logTheError:
 }
 
 
-- (void) handleBecomingActive: (id) notification {
+- (void) handleBecomingActive: (id) notification
+{
     
     [self restartAudioProcessingGraph];
 }
 
-- (id) initWithNibName: (NSString *) nibNameOrNil bundle: (NSBundle *) nibBundleOrNil {
+- (id) initWithNibName: (NSString *) nibNameOrNil bundle: (NSBundle *) nibBundleOrNil
+{
     
     self = [super initWithNibName: nibNameOrNil bundle: nibBundleOrNil];
     
@@ -497,7 +507,8 @@ logTheError:
 }
 
 
-- (void) viewDidLoad {
+- (void) viewDidLoad
+{
     
     [super viewDidLoad];
     // Set up the audio session for this app, in the process obtaining the
@@ -516,7 +527,8 @@ logTheError:
     [self registerForUIApplicationNotifications];
 }
 
-- (void) viewDidUnload {
+- (void) viewDidUnload
+{
     
     self.currentPresetLabel = nil;
     self.presetOneButton    = nil;
@@ -528,13 +540,15 @@ logTheError:
     [super viewDidUnload];
 }
 
-- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
     
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void) didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning
+{
     
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

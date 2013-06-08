@@ -23,10 +23,9 @@
 
 @implementation GridBrain
 
-@synthesize scale = _scale, key = _key, rows = _rows, chord = _chord, chordInKey = _chordInKey, rowInterval = _rowInterval, rowInKey = _rowInKey, baseRow = _baseRow, startOctave = _startOctave, numRows = _numRows, octaveJump = _octaveJump;
 
-
--(id)init{
+-(id)init
+{
     if(self = [super init]) {
         //Default scale is Major
         _scale = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],
@@ -67,7 +66,9 @@
     return self;
 }
 
--(NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave {
+
+-(NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave
+{
     NSMutableArray *mutableRow = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
     
     //seed the previous note with the normalized root note of key
@@ -89,7 +90,9 @@
     return [mutableRow copy];
 }
 
-+(NSDictionary *)midiNotes {
+
++(NSDictionary *)midiNotes
+{
     static NSDictionary *midiNotes = nil;
     if(!midiNotes) {
         NSArray *notes = [NSArray arrayWithObjects:@"C", @"C#", @"D", @"D#",
@@ -106,7 +109,9 @@
     return midiNotes;
 }
 
-+(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave {
+
++(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave
+{
     NSString *noteName = [[GridBrain midiNotes] objectForKey:[NSNumber numberWithInt:(note % 12)]];
     if(octave) {
         int midiOctave = -2; //notes 0 thru 11 are in the -5th octave as defined by MIDI
@@ -116,7 +121,9 @@
     return noteName;
 }
 
--(void)rebuildRows {
+
+-(void)rebuildRows
+{
     self.rows = [[NSMutableArray alloc] initWithCapacity:([self.numRows intValue])];
     //initialize with base row first
     [self.rows addObject:self.baseRow];
@@ -155,11 +162,14 @@
 }
 
 
--(NSArray *)notesForRow:(int)row {
+-(NSArray *)notesForRow:(int)row
+{
     return [[self.rows objectAtIndex:row] copy];
 }
 
--(NSArray *)notesForTouchAtXValue:(int)x YValue:(int)y {
+
+-(NSArray *)notesForTouchAtXValue:(int)x YValue:(int)y
+{
     if(y >= self.rows.count || x > self.scale.count) return nil;
     
     NSMutableArray *notes = [[NSMutableArray alloc] init];
@@ -222,7 +232,9 @@
     return notes;
 }
 
--(NSArray *)gridLocationOfNote:(int) note {
+
+-(NSArray *)gridLocationOfNote:(int) note
+{
     int x, y;
     NSMutableArray *locs = [[NSMutableArray alloc] init];
     for(y = 0; y < self.rows.count; y++) {
@@ -235,8 +247,12 @@
     return locs;
 }
 
-#pragma mark Setters
--(void)setKey:(NSNumber *)key {
+
+#pragma mark -
+#pragma mark Accessors
+
+-(void)setKey:(NSNumber *)key
+{
     int root = [key intValue];
     if(root > 11) {
         //normalize root to the lowest midi octave
@@ -247,27 +263,45 @@
     
     [self rebuild];
 }
--(void)setScale:(NSArray *)scale {
+
+
+-(void)setScale:(NSArray *)scale
+{
     _scale = scale;
     [self rebuild];
 }
--(void)setRowInterval:(NSNumber *)rowInterval {
+
+
+-(void)setRowInterval:(NSNumber *)rowInterval
+{
     _rowInterval = rowInterval;
     [self rebuild];
 }
--(void)setRowInKey:(NSNumber *)rowInKey {
+
+
+-(void)setRowInKey:(NSNumber *)rowInKey
+{
     _rowInKey = rowInKey;
     [self rebuild];
 }
--(void)setStartOctave:(NSNumber *)startOctave {
+
+
+-(void)setStartOctave:(NSNumber *)startOctave
+{
     _startOctave = startOctave;
     [self rebuild];
 }
--(void)setNumRows:(NSNumber *)numRows {
+
+
+-(void)setNumRows:(NSNumber *)numRows
+{
     _numRows = numRows;
     [self rebuild];
 }
--(void)rebuild {
+
+
+-(void)rebuild
+{
     self.octaveJump = 0;
     for(NSNumber *num in self.scale) {
         self.octaveJump += [num intValue];
