@@ -8,14 +8,70 @@
 
 #import "ZFNumberBag.h"
 
-@interface ZFNumberBag ()
-
-@property NSUInteger pointer;
-
-@end
 
 @implementation ZFNumberBag
 
+#pragma mark Class initializers
++ (NSNumber *)numberWithBool:(BOOL)value
+{
+    return [[ZFNumberBag alloc] initWithBool:value];
+}
++ (NSNumber *)numberWithChar:(char)value
+{
+    return [[ZFNumberBag alloc] initWithChar:value];
+}
++ (NSNumber *)numberWithDouble:(double)value
+{
+    return [[ZFNumberBag alloc] initWithDouble:value];
+}
++ (NSNumber *)numberWithFloat:(float)value
+{
+    return [[ZFNumberBag alloc] initWithFloat:value];
+}
++ (NSNumber *)numberWithInt:(int)value
+{
+    return [[ZFNumberBag alloc] initWithInt:value];
+}
++ (NSNumber *)numberWithInteger:(NSInteger)value
+{
+    return [[ZFNumberBag alloc] initWithInteger:value];
+}
++ (NSNumber *)numberWithLong:(long)value
+{
+    return [[ZFNumberBag alloc] initWithLong:value];
+}
++ (NSNumber *)numberWithLongLong:(long long)value
+{
+    return [[ZFNumberBag alloc] initWithLongLong:value];
+}
++ (NSNumber *)numberWithShort:(short)value
+{
+    return [[ZFNumberBag alloc] initWithShort:value];
+}
++ (NSNumber *)numberWithUnsignedChar:(unsigned char)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedChar:value];
+}
++ (NSNumber *)numberWithUnsignedInt:(unsigned int)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedInt:value];
+}
++ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedInteger:value];
+}
++ (NSNumber *)numberWithUnsignedLong:(unsigned long)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedLong:value];
+}
++ (NSNumber *)numberWithUnsignedLongLong:(unsigned long long)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedLongLong:value];
+}
++ (NSNumber *)numberWithUnsignedShort:(unsigned short)value
+{
+    return [[ZFNumberBag alloc] initWithUnsignedShort:value];
+}
 
 #pragma mark Initializers
 
@@ -34,27 +90,6 @@
     }
     return self;
 }
-- (id)initWithInt:(int)anInt
-{
-    if(self = [self init]) {
-        [self.bag addObject:[NSNumber numberWithInt:anInt]];
-    }
-    return self;
-}
-- (id)initWithFloat:(float)aFloat
-{
-    if(self = [self init]) {
-        [self.bag addObject:[NSNumber numberWithFloat:aFloat]];
-    }
-    return self;
-}
-- (id)initWithBool:(BOOL)aBOOL
-{
-    if(self = [self init]) {
-        [self.bag addObject:[NSNumber numberWithBool:aBOOL]];
-    }
-    return self;
-}
 - (id)initWithObject:(id)anObject
 {
     if(self = [self init]) {
@@ -62,6 +97,113 @@
     }
     return self;
 }
+
+- (id)initWithBool:(BOOL)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithBool:value]];
+    }
+    return self;
+}
+- (id)initWithChar:(char)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithChar:value]];
+    }
+    return self;
+}
+- (id)initWithDouble:(double)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithDouble:value]];
+    }
+    return self;
+}
+- (id)initWithFloat:(float)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithFloat:value]];
+    }
+    return self;
+}
+- (id)initWithInt:(int)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithInt:value]];
+    }
+    return self;
+}
+- (id)initWithInteger:(NSInteger)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithInteger:value]];
+    }
+    return self;
+}
+- (id)initWithLong:(long)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithLong:value]];
+    }
+    return self;
+}
+- (id)initWithLongLong:(long long)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithLongLong:value]];
+    }
+    return self;
+}
+- (id)initWithShort:(short)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithShort:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedChar:(unsigned char)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedChar:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedInt:(unsigned int)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedInt:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedInteger:(NSUInteger)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedInteger:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedLong:(unsigned long)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedLong:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedLongLong:(unsigned long long)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedLongLong:value]];
+    }
+    return self;
+}
+- (id)initWithUnsignedShort:(unsigned short)value
+{
+    if (self = [self init]) {
+        [self.bag addObject:[NSNumber numberWithUnsignedShort:value]];
+    }
+    return self;
+}
+
 
 
 #pragma mark Value
@@ -136,21 +278,83 @@
         return nil;
     }
 }
-- (int)intValue
+- (id)objectValue
 {
-    return [[self numberValue] intValue];
+    return [self.bag objectAtIndex:self.pointer];
+}
+
+- (BOOL)boolValue
+{
+    return [[self numberValue] boolValue];
+}
+- (char)charValue
+{
+    return [[self numberValue] charValue];
+}
+- (NSDecimal)decimalValue
+{
+    return [[self numberValue] decimalValue];
+}
+- (double)doubleValue
+{
+    return [[self numberValue] doubleValue];
 }
 - (float)floatValue
 {
     return [[self numberValue] floatValue];
 }
-- (BOOL)boolValue
+- (int)intValue
 {
-    return [[self numberValue] boolValue];
+    return [[self numberValue] intValue];
 }
-- (id)objectValue
+- (NSInteger)integerValue
 {
-    return [self.bag objectAtIndex:self.pointer];
+    return [[self numberValue] integerValue];
+}
+- (long long)longLongValue
+{
+    return [[self numberValue] longLongValue];
+}
+- (long)longValue
+{
+    return [[self numberValue] longValue];
+}
+- (short)shortValue
+{
+    return [[self numberValue] shortValue];
+}
+- (unsigned char)unsignedCharValue
+{
+    return [[self numberValue] unsignedCharValue];
+}
+- (NSUInteger)unsignedIntegerValue
+{
+    return [[self numberValue] unsignedIntegerValue];
+}
+- (unsigned int)unsignedIntValue
+{
+    return [[self numberValue] unsignedIntValue];
+}
+- (unsigned long long)unsignedLongLongValue
+{
+    return [[self numberValue] unsignedLongLongValue];
+}
+- (unsigned long)unsignedLongValue
+{
+    return [[self numberValue] unsignedLongValue];
+}
+- (unsigned short)unsignedShortValue
+{
+    return [[self numberValue] unsignedShortValue];
+}
+
+- (NSString *)descriptionWithLocale:(id)locale
+{
+    return [[self numberValue] descriptionWithLocale:locale];
+}
+- (NSString *)stringValue;
+{
+    return [[self numberValue] stringValue];
 }
 
 
@@ -324,6 +528,23 @@
     return [self.bag count];
 }
 
+#pragma mark NSNumber
+- (NSComparisonResult)compare:(NSNumber *)otherNumber
+{
+    return [[self numberValue] compare:otherNumber];
+}
+- (BOOL)isEqualToNumber:(NSNumber *)number
+{
+    return [[self numberValue] isEqualToNumber:number];
+}
+- (const char *)objCType
+{
+    return [[self numberValue] objCType];
+}
+- (void)getValue:(void *)value
+{
+    [[self numberValue] getValue:value];
+}
 
 #pragma mark -
 #pragma mark Pointer Manipulation
