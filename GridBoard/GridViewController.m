@@ -15,10 +15,9 @@
 
 
 @interface GridViewController ()
-//Keep track of what notes are active, converted to points and passed to view for coloring
-@property (strong, nonatomic) NSMutableArray *activeNotes;
 
-//Shiney new synthesizer
+//Keep track of what notes are active, converted to points and passed to view for coloring
+@property (strong, nonatomic) NSMutableSet *touches;
 @property (strong, nonatomic) GridSampler *sampler;
 
 @end
@@ -29,36 +28,51 @@
 #pragma mark -
 #pragma mark Note Control
 
--(void)notesOn:(NSArray *)notes
+- (void)notesOn:(NSSet *)notes
 {
-    [self.activeNotes addObjectsFromArray:notes];
-    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
+    NSMutableArray *gridActive = [self.gridView.activeSquares mutableCopy];
     
-    for(NSNumber *note in notes) {
-        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
+    for (NSNumber *note in notes) {
+        for (NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
             [gridActive addObject:pointVal];
         }
 
-        [self.sampler startPlayingNote:[note integerValue] withVelocity:0.7];
+        [self startPlayingNote:note withVelocity:0.7];
     }
-    self.gridView.activeNotes = gridActive;
+    self.gridView.activeSquares = gridActive;
 }
 
 
--(void)notesOff:(NSArray *)notes
+- (void)notesOff:(NSSet *)notes
 {
-    [self.activeNotes addObjectsFromArray:notes];
-    NSMutableArray *gridActive = [self.gridView.activeNotes mutableCopy];
+    NSMutableArray *gridActive = [self.gridView.activeSquares mutableCopy];
 
-    for(NSNumber *note in notes) {
-        [self.activeNotes removeObject:note];
-        for(NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
+    for (NSNumber *note in notes) {
+        for (NSValue *pointVal in [self.brain gridLocationOfNote:[note intValue]]) {
             [gridActive removeObject:pointVal];
         }
 
-        [self.sampler stopPlayingNote:[note integerValue]];
+        [self stopPlayingNote:note];
     }
-    self.gridView.activeNotes = gridActive;
+    self.gridView.activeSquares = gridActive;
+}
+
+
+- (void)updateNotes
+{
+    NSMutableSet *newNotes = [[NSMutableSet alloc] init];
+    for (NSValue *touch in self.touches) {
+        CGPoint gridLoc = [touch CGPointValue];
+        [newNotes addObjectsFromArray:[self.brain notesForTouchAtXValue:gridLoc.x YValue:gridLoc.y]];
+    }
+    
+    if (![self.currentNotes isEqualToSet:newNotes]) {
+        NSMutableSet *notesToTurnOff = [self.currentNotes mutableCopy];
+        [notesToTurnOff minusSet:newNotes];
+        
+        [self notesOn:newNotes];
+        [self notesOff:notesToTurnOff];
+    }
 }
 
 
@@ -67,57 +81,49 @@
 
 #pragma mark Touch Events
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for(UITouch *touch in touches) {
+    for (UITouch *touch in touches) {
         CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        [self notesOn:[self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y]];
-    }
-}
-
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    for(UITouch *touch in touches) {
-        CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        NSArray *newNotes = [self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y];
-        NSMutableArray *notesToTurnOn = [[NSMutableArray alloc] init];
-        NSMutableArray *notesToTurnOff = [[NSMutableArray alloc] init];
         
-        for(NSNumber *activeNote in self.activeNotes) {
-            if(![newNotes containsObject:activeNote]){
-                [notesToTurnOff addObject:activeNote];
-            }
-        }
-        for(NSNumber *newNote in newNotes) {
-            if(![self.activeNotes containsObject:newNote]) {
-                [notesToTurnOn addObject:newNote];
-            }
-        }
-
-        [self notesOn:notesToTurnOn];
-        [self notesOff:notesToTurnOff];
+        [self.touches addObject:[NSValue valueWithCGPoint:gridLoc]];
     }
+    [self updateNotes];
 }
 
 
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    for(UITouch *touch in touches) {
+    NSMutableSet *newTouches = [[NSMutableSet alloc] initWithCapacity:[[event allTouches] count]];
+    for (UITouch *touch in [event allTouches]) {
         CGPoint gridLoc = [self gridLocationOfTouch:touch];
-        [self notesOff:[self.brain notesForTouchAtXValue:(int)gridLoc.x YValue:(int)gridLoc.y]];
+        [newTouches addObject:[NSValue valueWithCGPoint:gridLoc]];
+    }
+    if (![self.touches isEqualToSet:newTouches]) {
+        self.touches = newTouches;
+        [self updateNotes];
     }
 }
 
 
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    //same as touches ended?
+    for (UITouch *touch in touches) {
+        CGPoint gridLoc = [self gridLocationOfTouch:touch];
+
+        [self.touches removeObject:[NSValue valueWithCGPoint:gridLoc]];
+    }
+    [self updateNotes];
+}
+
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
     [self touchesEnded:touches withEvent:event];
 }
 
 
--(CGPoint)gridLocationOfTouch:(UITouch *)touch
+- (CGPoint)gridLocationOfTouch:(UITouch *)touch
 {
     CGFloat height = self.gridView.bounds.size.height;
     CGFloat width = self.gridView.bounds.size.width;
@@ -132,8 +138,8 @@
 
 #pragma mark UIViewController
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([segue.identifier isEqualToString: @"Config"]) {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString: @"Config"]) {
         GridConfigViewController *dest = (GridConfigViewController *)segue.destinationViewController;
         dest.brain = self.brain;
         dest.gridView = self.gridView;
@@ -160,123 +166,15 @@
 }
 
 
-
-#pragma mark -
-#pragma mark Audio session delegate
-
-// Respond to an audio interruption, such as a phone call or a Clock alarm.
-- (void) beginInterruption
-{
-    
-    // Stop any notes that are currently playing.
-    [self notesOff:self.activeNotes];
-    
-    // Interruptions do not put an AUGraph object into a "stopped" state, so
-    //    do that here.
-    [self.sampler stopAudioProcessingGraph];
-}
-
-
-// Respond to the ending of an audio interruption.
-- (void) endInterruptionWithFlags: (NSUInteger) flags
-{
-    
-    NSError *endInterruptionError = nil;
-    [[AVAudioSession sharedInstance] setActive: YES
-                                         error: &endInterruptionError];
-    if (endInterruptionError != nil) {
-        
-        NSLog (@"Unable to reactivate the audio session.");
-        return;
-    }
-    
-    if (flags & AVAudioSessionInterruptionFlags_ShouldResume) {
-        
-
-//         In a shipping application, check here to see if the hardware sample rate changed from
-//         its previous value by comparing it to graphSampleRate. If it did change, reconfigure
-//         the ioInputStreamFormat struct to use the new sample rate, and set the new stream
-//         format on the two audio units. (On the mixer, you just need to change the sample rate).
-//         
-//         Then call AUGraphUpdate on the graph before starting it.
-
-        
-        [self.sampler restartAudioProcessingGraph];
-    }
-}
-
-
-#pragma mark - Application state management
-
-// The audio processing graph should not run when the screen is locked or when the app has
-//  transitioned to the background, because there can be no user interaction in those states.
-//  (Leaving the graph running with the screen locked wastes a significant amount of energy.)
-//
-// Responding to these UIApplication notifications allows this class to stop and restart the
-//    graph as appropriate.
-- (void)registerForUIApplicationNotifications
-{
-    
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    
-    [notificationCenter addObserver: self
-                           selector: @selector (handleResigningActive:)
-                               name: UIApplicationWillResignActiveNotification
-                             object: [UIApplication sharedApplication]];
-    
-    [notificationCenter addObserver: self
-                           selector: @selector (handleBecomingActive:)
-                               name: UIApplicationDidBecomeActiveNotification
-                             object: [UIApplication sharedApplication]];
-}
-
-
-- (void)unregisterForNotifications
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                              forKeyPath:UIApplicationDidBecomeActiveNotification];
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                              forKeyPath:UIApplicationWillResignActiveNotification];
-    
-}
-
-
-- (void)handleResigningActive: (id) notification
-{
-    
-    [self notesOff:self.activeNotes];
-
-    [self.sampler stopAudioProcessingGraph];
-}
-
-
-- (void)handleBecomingActive: (id) notification
-{
-    
-    [self.sampler restartAudioProcessingGraph];
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSURL *aupURL = [[NSBundle mainBundle] URLForResource:@"Trombone" withExtension:@"aupreset"];
-    self.sampler = [[GridSampler alloc] initWithPresetURL:aupURL audioSessionDelegate:self];
     
 	self.brain = [[GridBrain alloc] init];
     self.gridView.rows = [self.brain.numRows intValue];
     self.gridView.columns = (self.brain.scale.count + 1);
     self.gridView.dataSource = self;
-    self.activeNotes = [[NSMutableArray alloc] init];
-    
-    [self registerForUIApplicationNotifications];
-
-}
-
-- (void)dealloc
-{
-    [self unregisterForNotifications];
+    self.touches = [[NSMutableSet alloc] init];
 }
 
 @end

@@ -12,12 +12,13 @@
 
 #import "GridBrain.h"
 #import "GridView.h"
+#import "SamplerViewController.h"
 
-@interface GridViewController : UIViewController <GridViewDataSource, AVAudioSessionDelegate>
+@interface GridViewController : SamplerViewController <GridViewDataSource, AVAudioSessionDelegate>
 
 @property (strong, nonatomic)GridBrain *brain;
 @property (weak, nonatomic) IBOutlet GridView *gridView;
 
--(NSString *)stringForCellAtXValue:(int)x YValue:(int)y;
+- (NSString *)stringForCellAtXValue:(int)x YValue:(int)y;
 
 @end
