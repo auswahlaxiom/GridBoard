@@ -55,7 +55,7 @@
         self.displayNoteNames = [NSNumber numberWithBool:names];
         
         //sort of a hack but its less code in the end
-        for(NSNumber *num in actives) {
+        for (NSNumber *num in actives) {
             UIButton *derpy = [[UIButton alloc] init];
             derpy.tag = [num intValue];
             [self buttonPressed:derpy];
@@ -69,11 +69,11 @@
 #pragma mark This is the data the user actually cares about
 
 - (NSArray *)activeNotes {
-    if(self.firstNoteActive == -1) return nil;
+    if (self.firstNoteActive == -1) return nil;
     NSMutableArray *notes = [[NSMutableArray alloc] init];
-    for(int i = 0; i < 128; i++) {
+    for (int i = 0; i < 128; i++) {
         KeyActiveIndicator* anIndicator = [self.activeIndicators objectAtIndex:i];
-        if([anIndicator isActive]) {
+        if ([anIndicator isActive]) {
             [notes addObject:anIndicator];
         }
     }
@@ -86,9 +86,9 @@
 
 - (NSMutableArray*)activeIndicators
 {
-    if(_activeIndicators == nil) {
+    if (_activeIndicators == nil) {
         _activeIndicators = [[NSMutableArray alloc] initWithCapacity:127];
-        for(int i = 0; i < 128; i++) {
+        for (int i = 0; i < 128; i++) {
             [_activeIndicators addObject:[[KeyActiveIndicator alloc] init]];
         }
     }
@@ -98,42 +98,42 @@
 
 - (NSNumber*)whiteWidth
 {
-    if(_whiteWidth == nil) self.whiteWidth = [NSNumber numberWithInt:50];
+    if (_whiteWidth == nil) self.whiteWidth = [NSNumber numberWithInt:50];
     return _whiteWidth;
 }
 
 
 - (NSNumber *)blackWidth
 {
-    if(_blackWidth == nil) self.blackWidth = [NSNumber numberWithInt:30];
+    if (_blackWidth == nil) self.blackWidth = [NSNumber numberWithInt:30];
     return _blackWidth;
 }
 
 
 - (NSNumber *)whiteHeightProportion
 {
-    if(_whiteHeightProportion == nil) self.whiteHeightProportion = [NSNumber numberWithFloat:1.0/3.0];
+    if (_whiteHeightProportion == nil) self.whiteHeightProportion = [NSNumber numberWithFloat:1.0/3.0];
     return _whiteHeightProportion;
 }
 
 
 - (NSNumber *)blackHeightProportion
 {
-    if(_blackHeightProportion == nil) self.blackHeightProportion = [NSNumber numberWithFloat:2.0/3.0];
+    if (_blackHeightProportion == nil) self.blackHeightProportion = [NSNumber numberWithFloat:2.0/3.0];
     return _blackHeightProportion;
 }
 
 
 - (NSNumber *)octaves
 {
-    if(_octaves == nil) self.octaves = [NSNumber numberWithInt:10];
+    if (_octaves == nil) self.octaves = [NSNumber numberWithInt:10];
     return _octaves;
 }
 
 
 - (NSNumber *)displayNoteNames
 {
-    if(_displayNoteNames == nil) self.displayNoteNames = [NSNumber numberWithBool:YES];
+    if (_displayNoteNames == nil) self.displayNoteNames = [NSNumber numberWithBool:YES];
     return _displayNoteNames;
 }
 
@@ -180,7 +180,7 @@
     //initialize whites
     int midiOffset = 0;
     int octave = 0;
-    for(int i = 0; i < octaves * 7; i++) {
+    for (int i = 0; i < octaves * 7; i++) {
         
         UIButton *key = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [key setBackgroundImage:[KeyViewController imageFromColor:[UIColor colorWithWhite:0.4 alpha:1.0]]
@@ -208,7 +208,7 @@
         [self.keyScrollView addSubview:activeIndicator];
         [self.activeIndicators replaceObjectAtIndex:midiNote withObject:activeIndicator];
         
-        if([self.displayNoteNames boolValue]) {
+        if ([self.displayNoteNames boolValue]) {
             int note = (asciiForA + (i+2) % 7);
             UILabel *label = [[UILabel alloc] init];
             label.text = [NSString stringWithFormat:@"%c %i", note, octave-2];
@@ -221,18 +221,18 @@
         }
         
         midiOffset += 2;
-        if(midiOffset == 6) midiOffset = 5;
-        if(midiOffset ==13) {midiOffset = 0;octave++;}
+        if (midiOffset == 6) midiOffset = 5;
+        if (midiOffset ==13) {midiOffset = 0;octave++;}
 
     }
     
     //initialize blacks
     midiOffset = 1;
     octave = 0;
-    for(int i = 0; i < octaves; i++) {
+    for (int i = 0; i < octaves; i++) {
         int position = 0;
 
-        for(int j = 0; j < 5; j++) {
+        for (int j = 0; j < 5; j++) {
             UIButton *key = [UIButton buttonWithType:UIButtonTypeCustom];
             [key setBackgroundImage:[KeyViewController imageFromColor:[UIColor lightGrayColor]]
                               forState:UIControlStateNormal];
@@ -265,7 +265,7 @@
             
             position++;
             midiOffset += 2;
-            if(position == 2) {position = 3; midiOffset++;}
+            if (position == 2) {position = 3; midiOffset++;}
             
         }
         midiOffset = 1;
@@ -294,7 +294,7 @@
     [self.keyScrollView setContentSize:CGSizeMake(octaves * 7 * whiteWidth, height)];
     
     //white keys, indicators, and labels
-    for(int i = 0; i < octaves * 7; i++) {
+    for (int i = 0; i < octaves * 7; i++) {
         UIButton *whiteKey = [self.whiteKeys objectAtIndex:i];
         [whiteKey setFrame:CGRectMake(i*whiteWidth, 0, whiteWidth, whiteHeight)];
         [whiteKey setHidden:NO];
@@ -305,7 +305,7 @@
         [activeIndicator setHidden:NO];
         
         UILabel *label = [self.keyLabels objectAtIndex:i];
-        if([self.displayNoteNames boolValue]) {
+        if ([self.displayNoteNames boolValue]) {
             [label setFrame:CGRectMake(whiteWidth*i+5, whiteHeight - (whiteWidth + 30) / 2, whiteWidth-10, 20)];
             [label setHidden:NO];
         } else {
@@ -315,11 +315,11 @@
     
     //black keys, indicators
     int blackIndex = 0;
-    for(int i = 0; i < octaves; i++) {
+    for (int i = 0; i < octaves; i++) {
         int offset = i * whiteWidth * 7;
         int position = 0;
         
-        for(int j = 0; j < 5; j++) {
+        for (int j = 0; j < 5; j++) {
             UIButton *blackKey = [self.blackKeys objectAtIndex:blackIndex];
             [blackKey setHidden:NO];
             blackIndex++;
@@ -331,12 +331,12 @@
             [activeIndicator setHidden:NO];
             
             position++;
-            if(position == 2) {position = 3;}
+            if (position == 2) {position = 3;}
         }
     }
     
     //hide keys not in use
-    for(int i = octaves * 7; i < self.whiteKeys.count; i++) {
+    for (int i = octaves * 7; i < self.whiteKeys.count; i++) {
         UIButton *whiteKey = [self.whiteKeys objectAtIndex:i];
         [whiteKey setHidden:YES];
         KeyActiveIndicator *activeIndicator = [self.activeIndicators objectAtIndex:whiteKey.tag];
@@ -345,7 +345,7 @@
         UILabel *label = [self.keyLabels objectAtIndex:i];
         [label setHidden:YES];
     }
-    for(int i = blackIndex; i < self.blackKeys.count; i++) {
+    for (int i = blackIndex; i < self.blackKeys.count; i++) {
         UIButton *blackKey = [self.blackKeys objectAtIndex:i];
         [blackKey setHidden:YES];
         KeyActiveIndicator *activeIndicator = [self.activeIndicators objectAtIndex:blackKey.tag];
@@ -361,14 +361,14 @@
 {
     KeyActiveIndicator *indi = [self.activeIndicators objectAtIndex:sender.tag];
     indi.isActive = !indi.isActive;
-    if(self.firstNoteActive == -1) {
+    if (self.firstNoteActive == -1) {
         indi.isFirst = true;
         self.firstNoteActive = indi.note;
     } else {
         self.firstNoteActive = -1;
-        for(int i = 0; i < 128; i++) {
+        for (int i = 0; i < 128; i++) {
             KeyActiveIndicator* anIndicator = [self.activeIndicators objectAtIndex:i];
-            if([anIndicator isActive] && self.firstNoteActive == -1) {
+            if ([anIndicator isActive] && self.firstNoteActive == -1) {
                 [anIndicator setIsFirst:true];
                 self.firstNoteActive = anIndicator.note;
             } else {
@@ -388,19 +388,19 @@
 }
 
 
--(void)updateWithProperties:(NSDictionary *)properties
+- (void)updateWithProperties:(NSDictionary *)properties
 {
-    if([properties objectForKey:@"whiteWidth"] != nil)
+    if ([properties objectForKey:@"whiteWidth"] != nil)
         self.whiteWidth = [properties objectForKey:@"whiteWidth"];
-    if([properties objectForKey:@"blackWidth"] != nil)
+    if ([properties objectForKey:@"blackWidth"] != nil)
         self.blackWidth = [properties objectForKey:@"blackWidth"];
-    if([properties objectForKey:@"whiteHeight"] != nil)
+    if ([properties objectForKey:@"whiteHeight"] != nil)
         self.whiteHeightProportion = [properties objectForKey:@"whiteHeight"];
-    if([properties objectForKey:@"blackHeight"] != nil)
+    if ([properties objectForKey:@"blackHeight"] != nil)
         self.blackHeightProportion = [properties objectForKey:@"blackHeight"];
-    if([properties objectForKey:@"octaves"])
+    if ([properties objectForKey:@"octaves"])
         self.octaves = [properties objectForKey:@"octaves"];
-    if([properties objectForKey:@"names"]) 
+    if ([properties objectForKey:@"names"]) 
         self.displayNoteNames = [properties objectForKey:@"names"];
     
     
@@ -411,7 +411,7 @@
 
 - (IBAction)displayConfig:(id)sender
 {
-    if(self.configPopover)
+    if (self.configPopover)
         [self.configPopover dismissPopoverAnimated:YES];
     else
         [self performSegueWithIdentifier:@"Show Config" sender:sender];
@@ -420,7 +420,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"Show Config"]) {
+    if ([segue.identifier isEqualToString:@"Show Config"]) {
         self.configPopover = [(UIStoryboardPopoverSegue *)segue popoverController];
         self.configger = segue.destinationViewController;
         self.configger.delegate = self;
@@ -438,51 +438,6 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [self resizeKeys];
-}
-#pragma mark -
-#pragma mark Audio session delegate
-
-// Respond to an audio interruption, such as a phone call or a Clock alarm.
-- (void) beginInterruption
-{
-    
-    // Stop any notes that are currently playing.
-    for(NSNumber *num in self.activeNotes) {
-        [self.sampler stopPlayingNote:[num integerValue]];
-    }
-    
-    // Interruptions do not put an AUGraph object into a "stopped" state, so
-    //    do that here.
-    [self.sampler stopAudioProcessingGraph];
-}
-
-
-// Respond to the ending of an audio interruption.
-- (void) endInterruptionWithFlags: (NSUInteger) flags
-{
-    
-    NSError *endInterruptionError = nil;
-    [[AVAudioSession sharedInstance] setActive: YES
-                                         error: &endInterruptionError];
-    if (endInterruptionError != nil) {
-        
-        NSLog (@"Unable to reactivate the audio session.");
-        return;
-    }
-    
-    if (flags & AVAudioSessionInterruptionFlags_ShouldResume) {
-        
-        
-        //         In a shipping application, check here to see if the hardware sample rate changed from
-        //         its previous value by comparing it to graphSampleRate. If it did change, reconfigure
-        //         the ioInputStreamFormat struct to use the new sample rate, and set the new stream
-        //         format on the two audio units. (On the mixer, you just need to change the sample rate).
-        //
-        //         Then call AUGraphUpdate on the graph before starting it.
-        
-        
-        [self.sampler restartAudioProcessingGraph];
-    }
 }
 
 

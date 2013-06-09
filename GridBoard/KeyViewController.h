@@ -10,9 +10,9 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "KeyConfigViewController.h"
+#import "SamplerViewController.h"
 
-
-@interface KeyViewController : UIViewController <KeyConfigDelegate, AVAudioSessionDelegate>
+@interface KeyViewController : SamplerViewController <KeyConfigDelegate, AVAudioSessionDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *keyScrollView;
 - (NSArray *)activeNotes;
@@ -31,7 +31,7 @@
 
 @property (weak, nonatomic) KeyConfigViewController *configger;
 //delegate
--(void)updateWithProperties:(NSDictionary *)properties;
+- (void)updateWithProperties:(NSDictionary *)properties;
 
 
 @end
