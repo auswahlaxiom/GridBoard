@@ -18,6 +18,6 @@
 @property (nonatomic) id<GridViewDataSource> dataSource;
 @property (nonatomic) int columns;
 @property (nonatomic) int rows;
-@property (nonatomic) NSArray *activeNotes;
+@property (nonatomic) NSArray *activeSquares;
 
 @end

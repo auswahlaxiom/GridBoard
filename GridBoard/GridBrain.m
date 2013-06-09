@@ -24,9 +24,9 @@
 @implementation GridBrain
 
 
--(id)init
+- (id)init
 {
-    if(self = [super init]) {
+    if (self = [super init]) {
         //Default scale is Major
         _scale = [NSArray arrayWithObjects:[NSNumber numberWithInt:1],
                     [NSNumber numberWithInt:2], [NSNumber numberWithInt:2],
@@ -54,7 +54,7 @@
         
         //Set octave jump
         _octaveJump = 0;
-        for(NSNumber *num in _scale) {
+        for (NSNumber *num in _scale) {
             _octaveJump += [num intValue];
         }
         
@@ -67,20 +67,20 @@
 }
 
 
--(NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave
+- (NSArray *)baseRowAdjustedForOctave: (bool)adjustOctave
 {
     NSMutableArray *mutableRow = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
     
     //seed the previous note with the normalized root note of key
     int prevNote = [self.key intValue] % 12;
     //adjust if necessary
-    if(adjustOctave) {
+    if (adjustOctave) {
         
         prevNote += 12 * [self.startOctave intValue];
     }
 
     [mutableRow addObject:[NSNumber numberWithInt:prevNote]];
-    for(int i = 1; i < self.scale.count; i++) {
+    for (int i = 1; i < self.scale.count; i++) {
         prevNote += [[self.scale objectAtIndex:i] intValue];
         [mutableRow addObject:[NSNumber numberWithInt:prevNote]];
     }
@@ -94,7 +94,7 @@
 +(NSDictionary *)midiNotes
 {
     static NSDictionary *midiNotes = nil;
-    if(!midiNotes) {
+    if (!midiNotes) {
         NSArray *notes = [NSArray arrayWithObjects:@"C", @"C#", @"D", @"D#",
                           @"E", @"F", @"F#", @"G", @"G#", @"A", @"A#", @"B", nil];
         NSArray *midiKeys = [NSArray arrayWithObjects:[NSNumber numberWithInt:0],
@@ -113,7 +113,7 @@
 +(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave
 {
     NSString *noteName = [[GridBrain midiNotes] objectForKey:[NSNumber numberWithInt:(note % 12)]];
-    if(octave) {
+    if (octave) {
         int midiOctave = -2; //notes 0 thru 11 are in the -5th octave as defined by MIDI
         midiOctave += note / 12;
         noteName = [noteName stringByAppendingString:[NSString stringWithFormat:@" %i", midiOctave]];
@@ -122,7 +122,7 @@
 }
 
 
--(void)rebuildRows
+- (void)rebuildRows
 {
     self.rows = [[NSMutableArray alloc] initWithCapacity:([self.numRows intValue])];
     //initialize with base row first
@@ -130,18 +130,18 @@
     
 
     NSMutableArray *notes = [[NSMutableArray alloc] initWithCapacity:self.scale.count];
-    for(int row = 1; row < [self.numRows intValue]; row++) {
-        if([self.rowInKey boolValue]) {
+    for (int row = 1; row < [self.numRows intValue]; row++) {
+        if ([self.rowInKey boolValue]) {
             NSArray *prevRow = [self.rows objectAtIndex:(row-1)];
 
-            for(int i = 0; i < self.scale.count; i++) {
+            for (int i = 0; i < self.scale.count; i++) {
                 //grab the note from the row below;
                 int base = [[prevRow objectAtIndex:i] intValue];
                 //Begin tracking how large the offset will be
                 int offset = 0; 
                 //The offsets start one over from the note below. Each row moves the note over by the row interval
                 int offsetIndex = (i+1 + (row-1) * [self.rowInterval intValue]) % self.scale.count;
-                for(int j = 0; j < [self.rowInterval intValue]; j++) {
+                for (int j = 0; j < [self.rowInterval intValue]; j++) {
                     offset += [[self.scale objectAtIndex:offsetIndex] intValue];
                     offsetIndex = (offsetIndex + 1) % self.scale.count;
                 }
@@ -151,7 +151,7 @@
             int firstNote = [[notes objectAtIndex:0] intValue];
             [notes addObject:[NSNumber numberWithInt:(self.octaveJump + firstNote)]];
         } else {
-            for(NSNumber *note in self.baseRow) {
+            for (NSNumber *note in self.baseRow) {
                 int noteWithOffset = [note intValue] + [self.rowInterval intValue] * row;
                 [notes addObject:[NSNumber numberWithInt:noteWithOffset]];
             }
@@ -162,31 +162,31 @@
 }
 
 
--(NSArray *)notesForRow:(int)row
+- (NSArray *)notesForRow:(int)row
 {
     return [[self.rows objectAtIndex:row] copy];
 }
 
 
--(NSArray *)notesForTouchAtXValue:(int)x YValue:(int)y
+- (NSArray *)notesForTouchAtXValue:(int)x YValue:(int)y
 {
-    if(y >= self.rows.count || x > self.scale.count) return nil;
+    if (y >= self.rows.count || x > self.scale.count) return nil;
     
     NSMutableArray *notes = [[NSMutableArray alloc] init];
     
     int base = [[[self.rows objectAtIndex:y] objectAtIndex:x] intValue];
     [notes addObject:[NSNumber numberWithInt:base]];
-    if(self.chord.count > 1) {
-        if([self.chordInKey boolValue]) {
+    if (self.chord.count > 1) {
+        if ([self.chordInKey boolValue]) {
             NSArray *row = [self.rows objectAtIndex:y];
             //determine the number of octaves up the base note is
             int octavesUp = 0;
             //get index of where we are in scale
             int scaleIndex = [row indexOfObject:[NSNumber numberWithInt:base]];
             //add notes
-            for(int i = 1; i < self.chord.count; i++) {
+            for (int i = 1; i < self.chord.count; i++) {
                 scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]);
-                if(scaleIndex > (row.count-1)) {
+                if (scaleIndex > (row.count-1)) {
                     octavesUp++;
                     scaleIndex = (scaleIndex + 1) % row.count;
                 }
@@ -197,8 +197,8 @@
             //old version that didn't work quite right
             /*
             int scaleIndex = [self.baseRow indexOfObject:[NSNumber numberWithInt:normalizedBase]] + 1;
-            for(int i = 1; i < self.chord.count; i++) {
-                for(int j = 0; j < [[self.chord objectAtIndex:i] intValue]; j++) {
+            for (int i = 1; i < self.chord.count; i++) {
+                for (int j = 0; j < [[self.chord objectAtIndex:i] intValue]; j++) {
                     base += [[self.scale objectAtIndex:(scaleIndex + j) % self.scale.count] intValue];
                 }
                 [notes addObject:[NSNumber numberWithInt:base]];
@@ -212,9 +212,9 @@
             int scaleIndex = x;
             int rowIndex = y;
             NSArray *row = [self.rows objectAtIndex:rowIndex];
-            for(int i = 1; i < self.chord.count; i++) {
+            for (int i = 1; i < self.chord.count; i++) {
                 scaleIndex = (scaleIndex + [[self.chord objectAtIndex:i] intValue]);
-                if(scaleIndex > (row.count-1)) {
+                if (scaleIndex > (row.count-1)) {
                     rowIndex++;
                     row = [self.rows objectAtIndex:rowIndex];
                     scaleIndex = (scaleIndex + 1) % row.count;
@@ -223,7 +223,7 @@
             }
              */
         } else {
-            for(int i = 1; i < self.chord.count; i++) {
+            for (int i = 1; i < self.chord.count; i++) {
                 base += [[self.chord objectAtIndex:i] intValue];
                 [notes addObject:[NSNumber numberWithInt:base]];
             }
@@ -233,13 +233,13 @@
 }
 
 
--(NSArray *)gridLocationOfNote:(int) note
+- (NSArray *)gridLocationOfNote:(int) note
 {
     int x, y;
     NSMutableArray *locs = [[NSMutableArray alloc] init];
-    for(y = 0; y < self.rows.count; y++) {
-        for(x = 0; x <= self.scale.count; x++) {
-            if([[[self.rows objectAtIndex:y] objectAtIndex:x] intValue] == note) {
+    for (y = 0; y < self.rows.count; y++) {
+        for (x = 0; x <= self.scale.count; x++) {
+            if ([[[self.rows objectAtIndex:y] objectAtIndex:x] intValue] == note) {
                 [locs addObject:[NSValue valueWithCGPoint: CGPointMake(x, y)]];
             }
         }
@@ -251,10 +251,10 @@
 #pragma mark -
 #pragma mark Accessors
 
--(void)setKey:(NSNumber *)key
+- (void)setKey:(NSNumber *)key
 {
     int root = [key intValue];
-    if(root > 11) {
+    if (root > 11) {
         //normalize root to the lowest midi octave
         root = root % 12;
     }
@@ -265,45 +265,45 @@
 }
 
 
--(void)setScale:(NSArray *)scale
+- (void)setScale:(NSArray *)scale
 {
     _scale = scale;
     [self rebuild];
 }
 
 
--(void)setRowInterval:(NSNumber *)rowInterval
+- (void)setRowInterval:(NSNumber *)rowInterval
 {
     _rowInterval = rowInterval;
     [self rebuild];
 }
 
 
--(void)setRowInKey:(NSNumber *)rowInKey
+- (void)setRowInKey:(NSNumber *)rowInKey
 {
     _rowInKey = rowInKey;
     [self rebuild];
 }
 
 
--(void)setStartOctave:(NSNumber *)startOctave
+- (void)setStartOctave:(NSNumber *)startOctave
 {
     _startOctave = startOctave;
     [self rebuild];
 }
 
 
--(void)setNumRows:(NSNumber *)numRows
+- (void)setNumRows:(NSNumber *)numRows
 {
     _numRows = numRows;
     [self rebuild];
 }
 
 
--(void)rebuild
+- (void)rebuild
 {
     self.octaveJump = 0;
-    for(NSNumber *num in self.scale) {
+    for (NSNumber *num in self.scale) {
         self.octaveJump += [num intValue];
     }
     self.baseRow = [self baseRowAdjustedForOctave:YES];

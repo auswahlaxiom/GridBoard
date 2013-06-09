@@ -75,9 +75,9 @@
 
 #pragma mark Initializers
 
--(id)init
+- (id)init
 {
-    if(self = [super init]) {
+    if (self = [super init]) {
         _bag = [[NSMutableArray alloc] init];
         _pointer = 0;
     }
@@ -85,14 +85,14 @@
 }
 - (id)initWithNumber:(NSNumber *)aNumber
 {
-    if(self = [self init]) {
+    if (self = [self init]) {
         [self.bag addObject:aNumber];
     }
     return self;
 }
 - (id)initWithObject:(id)anObject
 {
-    if(self = [self init]) {
+    if (self = [self init]) {
         [self.bag addObject:anObject];
     }
     return self;

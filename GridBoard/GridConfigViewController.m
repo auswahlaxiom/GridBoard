@@ -42,7 +42,7 @@
 }
 
 
--(void)refreshUI {
+- (void)refreshUI {
     self.keyLabel.text = [GridBrain nameForMidiNote:[[self.brain key] intValue] showOctave:NO];
     self.keySlider.value = self.brain.key.intValue;
     
@@ -58,9 +58,9 @@
     [self.chordInKeySwitch setOn:[[self.brain chordInKey] boolValue]];
     [self.rowInKeySwitch setOn:[[self.brain rowInKey] boolValue]];
     
-    if([self.brain.scale isEqualToArray:self.majorScale]) {
+    if ([self.brain.scale isEqualToArray:self.majorScale]) {
         self.scaleSegment.selectedSegmentIndex = 0;
-    } else if([self.brain.scale isEqualToArray:self.minorScale]) {
+    } else if ([self.brain.scale isEqualToArray:self.minorScale]) {
         self.scaleSegment.selectedSegmentIndex = 1;
     } else {
         self.scaleSegment.selectedSegmentIndex = 2;
@@ -68,16 +68,16 @@
     
     self.scaleTextField.text = [self stringForNotes:self.brain.scale];
     
-    if([self.brain.chord  isEqualToArray:[NSArray arrayWithObject:[NSNumber numberWithInt:0]]]) {
+    if ([self.brain.chord  isEqualToArray:[NSArray arrayWithObject:[NSNumber numberWithInt:0]]]) {
         self.chordSegment.selectedSegmentIndex = 0;
-    } else if([self.brain.chordInKey boolValue]) {
-        if([self.brain.chord isEqualToArray:self.majorChordInKey]) {
+    } else if ([self.brain.chordInKey boolValue]) {
+        if ([self.brain.chord isEqualToArray:self.majorChordInKey]) {
             self.chordSegment.selectedSegmentIndex = 1;
         } else {
             self.chordSegment.selectedSegmentIndex = 2;
         }
     } else {
-        if([self.brain.chord isEqualToArray:self.majorChordAbsolute]) {
+        if ([self.brain.chord isEqualToArray:self.majorChordAbsolute]) {
             self.chordSegment.selectedSegmentIndex = 1;
         } else {
             self.chordSegment.selectedSegmentIndex = 2;
@@ -87,7 +87,7 @@
 }
 
 
--(void)refreshGridView
+- (void)refreshGridView
 {
     self.gridView.rows = [self.brain.numRows intValue];
     self.gridView.columns = (self.brain.scale.count + 1);
@@ -98,7 +98,7 @@
 - (NSString *)stringForNotes:(NSArray *)notes
 {
     NSString *customNotes = @"";
-    for(NSNumber *num in notes) {
+    for (NSNumber *num in notes) {
         customNotes = [customNotes stringByAppendingString:[NSString stringWithFormat:@"%i ", [num intValue]]];
     }
     return customNotes;
@@ -108,7 +108,7 @@
 - (NSArray *)notesForString:(NSString *)string
 {
     NSMutableArray *notes = [[NSMutableArray alloc] init];
-    for(NSString *num in [string componentsSeparatedByString:@" "]) {
+    for (NSString *num in [string componentsSeparatedByString:@" "]) {
         [notes addObject:[NSNumber numberWithInt:[num intValue]]];
     }
     return notes;
@@ -117,11 +117,11 @@
 
 - (IBAction)scaleSelector:(UISegmentedControl *)sender
 {
-    if(sender.selectedSegmentIndex == 0) {
+    if (sender.selectedSegmentIndex == 0) {
         self.brain.scale = self.majorScale;
-    } else if(sender.selectedSegmentIndex == 1) {
+    } else if (sender.selectedSegmentIndex == 1) {
         self.brain.scale = self.minorScale;
-    } else if(sender.selectedSegmentIndex == 2) {
+    } else if (sender.selectedSegmentIndex == 2) {
         self.brain.scale = [self notesForString:self.scaleTextField.text];
     }
     [self refreshUI];
@@ -174,16 +174,16 @@
 
 - (IBAction)chordChanged:(UISegmentedControl *)sender
 {
-    if(sender.selectedSegmentIndex == 0) {
+    if (sender.selectedSegmentIndex == 0) {
         self.brain.chord = [NSArray arrayWithObject:[NSNumber numberWithInt:0]];
-    } else if([self.brain.chordInKey boolValue]) {
-        if(sender.selectedSegmentIndex == 1) {
+    } else if ([self.brain.chordInKey boolValue]) {
+        if (sender.selectedSegmentIndex == 1) {
             self.brain.chord = self.majorChordInKey;
         } else {
             self.brain.chord = [self notesForString:self.chordTextField.text];
         }
     } else {
-        if(sender.selectedSegmentIndex == 1) {
+        if (sender.selectedSegmentIndex == 1) {
             self.brain.chord = self.majorChordAbsolute;
         } else {
             self.brain.chord = [self notesForString:self.chordTextField.text];
@@ -197,12 +197,12 @@
 - (IBAction)chordInKeyChanged:(UISwitch *)sender
 {
     self.brain.chordInKey = [NSNumber numberWithBool:sender.on];
-    if([self.brain.chordInKey boolValue]) {
-        if([self.brain.chord isEqualToArray:self.majorChordAbsolute]) {
+    if ([self.brain.chordInKey boolValue]) {
+        if ([self.brain.chord isEqualToArray:self.majorChordAbsolute]) {
             self.brain.chord = self.majorChordInKey;
         }
     } else {
-        if([self.brain.chord isEqualToArray:self.majorChordInKey]) {
+        if ([self.brain.chord isEqualToArray:self.majorChordInKey]) {
             self.brain.chord = self.majorChordAbsolute;
         }
     }
@@ -216,9 +216,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    if(textField == self.chordTextField) {
+    if (textField == self.chordTextField) {
         self.brain.chord = [self notesForString:textField.text];
-    } else if(textField == self.scaleTextField) {
+    } else if (textField == self.scaleTextField) {
         self.brain.scale = [self notesForString:textField.text];
     }
     [self refreshUI];

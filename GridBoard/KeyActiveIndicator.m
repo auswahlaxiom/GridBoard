@@ -24,14 +24,14 @@
 }
 
 
--(void)setIsActive:(BOOL)isActive
+- (void)setIsActive:(BOOL)isActive
 {
     _isActive = isActive;
     [self setNeedsDisplay];
 }
 
 
--(void)setIsFirst:(BOOL)isFirst
+- (void)setIsFirst:(BOOL)isFirst
 {
     _isFirst = isFirst;
 
@@ -44,9 +44,9 @@
     CGContextRef c = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(c, 2.0);
     CGContextSetRGBStrokeColor(c, 0, 0, 0, 1);
-    if(self.isFirst) {
+    if (self.isFirst) {
         CGContextSetRGBFillColor(c, 0, 255, 0, 1);
-    } else if(self.isActive) {
+    } else if (self.isActive) {
         CGContextSetRGBFillColor(c, 0, 100, 255, 1);
     } else {
         CGContextSetRGBFillColor(c, 0, 0, 0, 0);

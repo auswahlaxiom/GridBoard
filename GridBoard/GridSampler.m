@@ -93,7 +93,7 @@ logTheError:
 }
 
 
--(OSStatus) loadFromDLSOrSoundFont: (NSURL *)bankURL withPatch: (int)presetNumber
+- (OSStatus) loadFromDLSOrSoundFont: (NSURL *)bankURL withPatch: (int)presetNumber
 {
     OSStatus result = noErr;
 

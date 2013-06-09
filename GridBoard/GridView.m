@@ -11,27 +11,27 @@
 @implementation GridView
 
 
--(void)setActiveNotes:(NSArray *)activeNotes
+- (void)setActiveSquares:(NSArray *)activeNotes
 {
-    if(_activeNotes != activeNotes) {
-        _activeNotes = activeNotes;
+    if (_activeSquares != activeNotes) {
+        _activeSquares = activeNotes;
         [self setNeedsDisplay];
     }
 }
 
 
--(void)setColumns:(int)columns
+- (void)setColumns:(int)columns
 {
-    if(_columns != columns) {
+    if (_columns != columns) {
         _columns = columns;
         [self setNeedsDisplay];
     }
 }
 
 
--(void)setRows:(int)rows
+- (void)setRows:(int)rows
 {
-    if(_rows != rows) {
+    if (_rows != rows) {
         _rows = rows;
         [self setNeedsDisplay];
     }
@@ -54,10 +54,10 @@
 }
 
 
--(void)setup
+- (void)setup
 {
     self.contentMode = UIViewContentModeRedraw;
-    self.activeNotes = [[NSArray alloc] init];
+    self.activeSquares = [[NSArray alloc] init];
     //other stuff?
 }
 
@@ -82,7 +82,7 @@
     CGContextMoveToPoint(context, point.x, point.y);
     
     //for each vertical line to draw, increment by correct distance and draow it
-    for(CGFloat i = hInterval; i < width; i+=hInterval) {
+    for (CGFloat i = hInterval; i < width; i+=hInterval) {
         point = CGPointMake(i,height);
         CGContextAddLineToPoint(context, point.x, point.y);
         CGContextStrokePath(context);
@@ -102,7 +102,7 @@
     CGContextMoveToPoint(context, point.x, point.y);
     
     //for each vertical line to draw, increment by correct distance and draow it
-    for(CGFloat i = vInterval; i < height; i+=vInterval) {
+    for (CGFloat i = vInterval; i < height; i+=vInterval) {
         point = CGPointMake(width, i);
         CGContextAddLineToPoint(context, point.x, point.y);
         CGContextStrokePath(context);
@@ -116,14 +116,14 @@
     UIGraphicsPopContext();
     
     //Draw grid labels
-    for(int x = 0; x < self.columns; x++) {
-        for(int y = 0; y < self.rows; y++) {
+    for (int x = 0; x < self.columns; x++) {
+        for (int y = 0; y < self.rows; y++) {
             NSString *note = [self.dataSource stringForCellAtXValue:x YValue:y];
             CGFloat yPosition = height - (float) (y+1) * vInterval + vInterval/4;
             CGFloat exposition = (float) x * hInterval;
             CGRect rect = CGRectMake(exposition, yPosition, hInterval, vInterval);
             UIGraphicsPushContext(context);
-            if([self.activeNotes containsObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]]) {
+            if ([self.activeSquares containsObject:[NSValue valueWithCGPoint:CGPointMake(x, y)]]) {
                 float color[4] = {.2, .7, .2, 1};
                 CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
                 CGContextSetFillColorWithColor(context, CGColorCreate(space, color));

@@ -12,7 +12,7 @@
 
 @protocol KeyConfigDelegate <NSObject>
 
--(void)updateWithProperties:(NSDictionary *)properties;
+- (void)updateWithProperties:(NSDictionary *)properties;
 
 @end
 

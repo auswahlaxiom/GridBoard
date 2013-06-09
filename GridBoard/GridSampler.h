@@ -13,7 +13,8 @@
 
 - (id)initWithPresetURL:(NSURL *)url audioSessionDelegate: (id<AVAudioSessionDelegate>)delegate;
 
--(OSStatus) loadFromDLSOrSoundFont: (NSURL *)bankURL withPatch: (int)presetNumber;
+- (OSStatus)loadFromDLSOrSoundFont: (NSURL *)bankURL withPatch: (int)presetNumber;
+- (OSStatus)loadSynthFromPresetURL:(NSURL *)presetURL;
 
 - (void)startPlayingNote:(UInt32)note withVelocity:(double)velocity;
 - (void)stopPlayingNote:(UInt32)note;

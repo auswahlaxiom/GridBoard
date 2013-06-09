@@ -42,6 +42,7 @@
 		1C79BADF1763E76A004AF8A0 /* GuitarAcoustic.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADA1763E76A004AF8A0 /* GuitarAcoustic.sf2 */; };
 		1C79BAE01763E76A004AF8A0 /* Dethmetal.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADB1763E76A004AF8A0 /* Dethmetal.sf2 */; };
 		1C79BAE11763E76A004AF8A0 /* Gorts_Filters.sf2 in Resources */ = {isa = PBXBuildFile; fileRef = 1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */; };
+		1C79BAE51763E86A004AF8A0 /* SamplerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C79BAE41763E86A004AF8A0 /* SamplerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,8 @@
 		1C79BADA1763E76A004AF8A0 /* GuitarAcoustic.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = GuitarAcoustic.sf2; path = SoundFonts/GuitarAcoustic.sf2; sourceTree = "<group>"; };
 		1C79BADB1763E76A004AF8A0 /* Dethmetal.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Dethmetal.sf2; path = SoundFonts/Dethmetal.sf2; sourceTree = "<group>"; };
 		1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */ = {isa = PBXFileReference; lastKnownFileType = file; name = Gorts_Filters.sf2; path = SoundFonts/Gorts_Filters.sf2; sourceTree = "<group>"; };
+		1C79BAE31763E86A004AF8A0 /* SamplerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SamplerViewController.h; sourceTree = "<group>"; };
+		1C79BAE41763E86A004AF8A0 /* SamplerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SamplerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,10 +184,8 @@
 		1C1FAC3B1709F79500BCF2E9 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1C3EB76C170BFED1000A6AED /* SampleViewController.h */,
-				1C3EB76D170BFED1000A6AED /* SampleViewController.m */,
-				1C79BA9A17638A28004AF8A0 /* Grid */,
-				1C79BA9917638A1E004AF8A0 /* Keys */,
+				1C79BAE21763E80C004AF8A0 /* AppleSample */,
+				1C79BAE61763E890004AF8A0 /* SamplerViews */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -192,8 +193,8 @@
 		1C1FAC3C1709F7A500BCF2E9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1C79BAD11763E706004AF8A0 /* GridSampler.m */,
 				1C79BAD21763E706004AF8A0 /* GridSampler.h */,
+				1C79BAD11763E706004AF8A0 /* GridSampler.m */,
 				1C79BAC31763BCF2004AF8A0 /* GridBrain.h */,
 				1C79BAC41763BCF2004AF8A0 /* GridBrain.m */,
 				1C79BAB81763999D004AF8A0 /* ZFNumberBag.h */,
@@ -266,6 +267,26 @@
 				1C79BADC1763E76A004AF8A0 /* Gorts_Filters.sf2 */,
 			);
 			name = Soundfonts;
+			sourceTree = "<group>";
+		};
+		1C79BAE21763E80C004AF8A0 /* AppleSample */ = {
+			isa = PBXGroup;
+			children = (
+				1C3EB76C170BFED1000A6AED /* SampleViewController.h */,
+				1C3EB76D170BFED1000A6AED /* SampleViewController.m */,
+			);
+			name = AppleSample;
+			sourceTree = "<group>";
+		};
+		1C79BAE61763E890004AF8A0 /* SamplerViews */ = {
+			isa = PBXGroup;
+			children = (
+				1C79BAE31763E86A004AF8A0 /* SamplerViewController.h */,
+				1C79BAE41763E86A004AF8A0 /* SamplerViewController.m */,
+				1C79BA9A17638A28004AF8A0 /* Grid */,
+				1C79BA9917638A1E004AF8A0 /* Keys */,
+			);
+			name = SamplerViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,6 +380,7 @@
 				1C79BAC51763BCF2004AF8A0 /* GridBrain.m in Sources */,
 				1C79BAC81763BD13004AF8A0 /* GridViewController.m in Sources */,
 				1C79BAD31763E706004AF8A0 /* GridSampler.m in Sources */,
+				1C79BAE51763E86A004AF8A0 /* SamplerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

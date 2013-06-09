@@ -61,17 +61,17 @@
 @property (strong, nonatomic)NSNumber *numRows;
 
 //Returns the name of a MIDI note.
-+(NSString *)nameForMidiNote:(int) note showOctave:(bool) octave;
++ (NSString *)nameForMidiNote:(int) note showOctave:(bool) octave;
 
 //Array of NSNumbers representing the MIDI notes that should be activated for a given grid position
 // x is the column, y is the row. (0,0) is the lower left most grid location
--(NSArray *)notesForTouchAtXValue:(int) x YValue:(int) y;
+- (NSArray *)notesForTouchAtXValue:(int) x YValue:(int) y;
 
 //find where in the grid a note is
--(NSArray *)gridLocationOfNote:(int) note;
+- (NSArray *)gridLocationOfNote:(int) note;
 
 //Array of NSNumbers representing the MIDI notes at the given row
 // The lowest row is row 0, row numbers increment up by 1.
--(NSArray *)notesForRow:(int) row;
+- (NSArray *)notesForRow:(int) row;
 
 @end
